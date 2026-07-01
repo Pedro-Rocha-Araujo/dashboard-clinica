@@ -47,12 +47,13 @@ export async function getProfissional(request:Request, response:Response):Promis
 
 export async function novoProfissional(request:Request, response:Response):Promise<Response> {
   try {
-    const { nome } = request.body
-    if(!nome) {
+    const { nome, especialidade } = request.body
+    if(!nome || !especialidade) {
       return response.status(400).json({ Erro: "Todos os campos são obrigatórios." })
     }
     await ProfissionalModel.create({
-      nome: nome
+      nome: nome,
+      especialidade: especialidade
     })
     return response.status(201).json({ Mensagem: `Profissional ${nome} cadastrado com sucesso.` })
   } catch(erro) {

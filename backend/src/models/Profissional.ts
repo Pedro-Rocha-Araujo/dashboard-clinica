@@ -3,18 +3,14 @@ import { Schema, model, Types } from "mongoose"
 interface Profissional {
   nome: string,
   ativo: boolean,
-  especialidade: Types.ObjectId
+  especialidade: string
 }
 
 const ProfissionalSchema = new Schema<Profissional>(
   {
     nome: {type: String, required: true, trim: true},
     ativo: {type: Boolean, required: true, default: true},
-    especialidade: {
-      type: Schema.Types.ObjectId,
-      ref: "Especialidade",
-      required: true
-    }
+    especialidade: {type: String, required: true, trim: true}
   }, 
   {
     timestamps: true
