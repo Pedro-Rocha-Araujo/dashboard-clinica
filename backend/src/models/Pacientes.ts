@@ -2,15 +2,15 @@ import { Schema, model } from "mongoose"
 
 interface Paciente {
   nome:string,
-  cpf:string,
-  telefone:string
+  cpf:number,
+  telefone:number
 }
 
 const PacienteSchema = new Schema<Paciente>(
   {
     nome: {type: String, required: true, trim: true},
-    cpf: {type: String, required: true, trim: true},
-    telefone: {type: String, required: true, trim: true},
+    cpf: {type: Number, required: true, trim: true},
+    telefone: {type: Number, required: true, trim: true},
   },
   {
     timestamps: true
