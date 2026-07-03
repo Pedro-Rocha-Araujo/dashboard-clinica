@@ -14,6 +14,10 @@ interface EncaminhamentoBody {
   profissional_id: string
 }
 
+interface EncerramentoParams {
+  senha_id: string
+}
+
 export async function listarSenhas(_request:Request, response:Response):Promise<Response> {
   try { 
     const listagem = await SenhaModel.find({ status: { $ne: "Aguardando" } })
@@ -98,6 +102,35 @@ export async function encaminharPaciente(
   } catch(erro) {
     return response.status(500).json({ 
       Mensagem: "Erro ao gerar senha",
+      Erro: erro
+    })
+  }
+}
+
+export async function encerrarAtendimento(request:Request<EncerramentoParams>, response:Response) {
+  try {
+    const { senha_id } = request.params
+    if(!senha_id) {
+      return response.status(400).json({ Erro: "Id da senha não informado." })
+    }
+    const validacao = await SenhaModel.findById(senha_id)
+
+    if(!validacao) {
+      return response.status(400).json({ Erro: "A senha em questão não existe." })
+    }
+    if(validacao.status !== "NaFila") {
+      return response.status(409).json({ Erro: "O status do atendimento não é compatível para ser encerrado no momento." })
+    }
+    const encerramento = await SenhaModel.findByIdAndUpdate(senha_id, {
+      status: "Finalizado"
+    })
+    if(!encerramento) {
+      return response.status(404).json({ Erro: "Erro ao encerrar o atendimento." })
+    }
+    return response.status(200).json({ Mensagem: "Atendimento finalizado." })
+  } catch(erro) {
+    return response.status(500).json({ 
+      Mensagem: "Erro ao finalizar atendimento.",
       Erro: erro
     })
   }
