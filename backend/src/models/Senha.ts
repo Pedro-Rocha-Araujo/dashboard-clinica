@@ -1,7 +1,7 @@
 import { Schema, model, Types } from "mongoose"
 
 interface Senha {
-  numero:string,
+  numero:number,
   paciente:Types.ObjectId,
   status: "Aguardando" | "NaFila" | "Atendido" | "Finalizado",
   profissional:Types.ObjectId
@@ -9,7 +9,7 @@ interface Senha {
 
 const SenhaSchema = new Schema<Senha>(
   {
-    numero: {type: String, required: true},
+    numero: {type: Number, required: true},
     paciente: {
       type: Schema.Types.ObjectId,
       ref: "Paciente",
@@ -17,7 +17,7 @@ const SenhaSchema = new Schema<Senha>(
     },
     status: {
       type: String,
-      enum: ["Aguardando", "NaFila", "Atendido", "Finalizado"], 
+      enum: ["Aguardando", "NaFila", "Finalizado", "Cancelado"], 
       default: "Aguardando", 
       required: true
     },

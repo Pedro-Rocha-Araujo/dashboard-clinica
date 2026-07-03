@@ -1,10 +1,14 @@
 import PacienteModel from "../models/Pacientes.js"
 import type { Request, Response } from "express"
 
-interface Paciente {
+interface PacienteBody {
   nome:string,
   cpf:number,
   telefone:number
+}
+
+interface PacienteParams {
+  paciente_id: string
 }
 
 export async function listarPacientes(_request:Request, response:Response):Promise<Response> {
@@ -39,7 +43,7 @@ export async function getPaciente(request:Request, response:Response):Promise<Re
   }
 }
 
-export async function novoPaciente(request:Request, response:Response):Promise<Response> {
+export async function novoPaciente(request:Request<{}, {}, PacienteBody>, response:Response):Promise<Response> {
   try {
     const { nome, cpf, telefone } = request.body
     if(!nome || !cpf || !telefone) {
@@ -59,7 +63,7 @@ export async function novoPaciente(request:Request, response:Response):Promise<R
   }
 }
 
-export async function deletarPaciente(request:Request, response:Response):Promise<Response> {
+export async function deletarPaciente(request:Request<PacienteParams>, response:Response):Promise<Response> {
   try {
     const { paciente_id } = request.params
     if(!paciente_id) {
