@@ -23,6 +23,11 @@ a {
   color: #fff;
 }
 
+button {
+  border: none;
+  cursor: pointer;
+}
+
 main {
   background-color: aliceblue;
   min-height: 100dvh;
@@ -51,7 +56,7 @@ main nav div.main {
 }
 
 main nav h1 a {
-  color: #555;
+  color: #000000;
 }
 
 main nav ul {
@@ -62,4 +67,54 @@ main nav ul {
 
 main section {
   padding: 2rem 1rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+@media screen and (max-width: 980px ) {
+  main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  main nav {
+    display: grid;
+    grid-template-rows: auto auto;
+  }
+
+  main nav div.header {
+    margin-bottom: 0;
+  }
+
+  main nav div.main {
+    margin: 0;
+    padding: 0.8rem 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  main nav ul {
+    width: 100%;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  main nav ul li:not(.ultimo) {
+    border-bottom: 1px solid #ffffff7c;
+    padding-bottom: 0.4rem;
+    width: 98%;
+    text-align: center;
+  }
+
+  form {
+    margin: auto;
+  }
+
+  h2 {
+    text-align: center;
+  }
 }

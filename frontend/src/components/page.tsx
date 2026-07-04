@@ -10,8 +10,9 @@ export default function Dashboard() {
 
       <div className="main">
         <ul>
-          <li><Link href={`/novo-profissional`}>Gerar Senha</Link></li>
+          <li><Link href={`/gerar-senha`}>Gerar Senha</Link></li>
           <li><Link href={`/novo-profissional`}>Cadastrar Profissional</Link></li>
+          <li className="ultimo"><Link href={`/encaminhamentos`}>Ver Encaminhamentos</Link></li>
         </ul>
       </div>
 

@@ -1,0 +1,45 @@
+section.home table {
+  width: 100%;
+  max-width: 1080px;
+  font-size: clamp(0.8rem, 3vw, 1.1rem);
+  border-collapse: collapse;
+  text-align: center;
+}
+
+section.home thead {
+  background-color: #555;
+  color: #fff;
+}
+
+section.home th, td{
+  border: 1px solid black;
+  padding: 0.4rem 0.8rem;
+}
+
+section.home button {
+  color: #fff;
+  font-size: 0.95rem;
+  margin: 2px;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+}
+
+section.home button.blue {
+  background-color: #2372d2;
+}
+
+section.home button.red {
+  background-color: #bb2323;
+}
+
+@media screen and (max-width: 980px) {
+  table {
+    margin: auto;
+  }
+
+  div.botoes {
+    display: flex;
+    flex-direction: column;
+  }
+}
