@@ -1,0 +1,24 @@
+form.editar-profissional {
+  width: 98%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+form.editar-profissional input, form.editar-profissional button {
+  border: 1px solid #555;
+  outline: none ;
+  padding: 0.5rem 0.2rem;
+}
+
+form.editar-profissional input {
+  font-size: clamp(0.9rem, 3vw, 1rem);
+}
+
+form.editar-profissional button {
+  padding: 0.7rem;
+  color: #fff;
+  background-color: #555;
+  border: none; 
+}
