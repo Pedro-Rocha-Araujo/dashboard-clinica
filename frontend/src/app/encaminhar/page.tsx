@@ -3,7 +3,7 @@ import "./encaminhamento.css"
 export default function Encaminhamento() {
   return (
     <section className="encaminhamento">
-      <h2>Encaminhar Paciente</h2>
+      <h2> <i className="fa-solid fa-circle-chevron-right"></i> Encaminhar Paciente</h2>
       <form>
         <input type="text" required placeholder="Nome do Paciente" />
         <input type="number" required placeholder="CPF do Paciente" />

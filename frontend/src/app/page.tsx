@@ -4,7 +4,7 @@ import "./home.css"
 export default function Home() {
   return (
     <section className="home">
-      <h2><i className="fa-solid fa-house"></i> Página home</h2>
+      <h2> <i className="fa-solid fa-house"></i> Página home</h2>
       <table>
         <thead>
           <tr>

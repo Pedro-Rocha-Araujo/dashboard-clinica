@@ -1,9 +1,10 @@
+import Botoes from "./(botoes)/page"
 import "./gerenciar-profissionais.css"
 
 export default function GerenciarProfissionais() {
   return (
     <section className="gerenciar-profissionais">
-      <h2><i className="fa-solid fa-users"></i> Gerenciar Profissionais</h2>
+      <h2> <i className="fa-solid fa-users"></i> Gerenciar Profissionais</h2>
       <h3>Profissionais Ativos</h3>
       <div className="profissionais">
 
@@ -14,10 +15,7 @@ export default function GerenciarProfissionais() {
             <p>Dermatologista</p>
           </div>
 
-          <div className="botoes">
-            <i className="fa-solid fa-pen-to-square fa-lg"></i>
-            <i className="fa-solid fa-circle-xmark fa-lg"></i>
-          </div>
+          <Botoes />
 
         </div>
         
@@ -34,7 +32,6 @@ export default function GerenciarProfissionais() {
           </div>
 
           <div className="botoes">
-            <i className="fa-solid fa-pen-to-square fa-lg"></i>
             <i className="fa-solid fa-circle-check fa-lg"></i>
           </div>
 
