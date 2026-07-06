@@ -20,6 +20,7 @@ export default function RootLayout({
           <Dashboard />
           {children}
         </main>
+        <script src="https://kit.fontawesome.com/ba7c57d421.js"></script>
       </body>
     </html>
   );

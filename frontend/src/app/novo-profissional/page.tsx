@@ -3,7 +3,7 @@ import "./novo-profissional.css"
 export default function NovoProfissional() {
   return (
     <section className="novo-profissional">
-      <h2>Novo Profissional</h2>
+      <h2><i className="fa-solid fa-circle-plus"></i> Novo Profissional</h2>
       
       <form className="novo-profissional" >
         <input 
