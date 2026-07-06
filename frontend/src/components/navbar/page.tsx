@@ -12,6 +12,7 @@ export default function Dashboard() {
         <ul>
           <li><Link href={`/gerar-senha`}>Gerar Senha</Link></li>
           <li><Link href={`/novo-profissional`}>Cadastrar Profissional</Link></li>
+          <li><Link href={`/gerenciar-profissionais`}>Gerenciar Profissionais</Link></li>
           <li className="ultimo"><Link href={`/encaminhamentos`}>Ver Encaminhamentos</Link></li>
         </ul>
       </div>

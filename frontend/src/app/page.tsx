@@ -1,3 +1,4 @@
+import Botoes from "../components/botoes-home/page"
 import "./home.css"
 
 export default function Home() {
@@ -22,10 +23,7 @@ export default function Home() {
             <td>João Souza Ramos</td>
             <td>Aguardando</td>
             <td>
-              <div className="botoes">
-                <button className="blue">Encaminhar</button>
-                <button className="red">Finalizar</button>
-              </div>
+              <Botoes />
             </td>
           </tr>
         </tbody>

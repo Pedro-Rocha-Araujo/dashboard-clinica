@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import Dashboard from "../components/page"
+import Dashboard from "../components/navbar/page"
 
 export const metadata: Metadata = {
   title: "Clínica",

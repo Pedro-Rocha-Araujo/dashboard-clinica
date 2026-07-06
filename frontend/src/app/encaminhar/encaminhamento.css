@@ -1,0 +1,32 @@
+section.encaminhamento form {
+  width: 98%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+section.encaminhamento input, button {
+  border: 1px solid #555;
+  outline: none ;
+  padding: 0.5rem 0.2rem;
+}
+
+section.encaminhamento button {
+  padding: 0.7rem;
+  color: #fff;
+  background-color: #555;
+  border: none; 
+}
+
+section.encaminhamento h3 {
+  margin: 0.2rem 0 0.4rem 0;
+}
+
+section.encaminhamento select {
+  color: #fff;
+  background-color: #555;
+  outline: none;
+  width: 100%;
+  padding: 0.6rem;
+}
