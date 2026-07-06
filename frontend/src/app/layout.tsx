@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { ToastContainer } from "react-toastify";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./globals.css";
 
 import Dashboard from "../components/navbar/page"
@@ -20,7 +22,7 @@ export default function RootLayout({
           <Dashboard />
           {children}
         </main>
-        <script src="https://kit.fontawesome.com/ba7c57d421.js"></script>
+      <ToastContainer />
       </body>
     </html>
   );
