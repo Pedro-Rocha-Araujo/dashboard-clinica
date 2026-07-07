@@ -1,18 +1,16 @@
-'use client'
 import { redirect } from "next/navigation"
 import axios from "axios"
 import { toast } from "react-toastify"
 interface BotoesProps {
   id: string,
-  getProfissionais: ()=>Promise<void>
 }
 
-export default function Botoes({ id, getProfissionais }: BotoesProps) {
+export default function Botoes({ id }: BotoesProps) {
 
   async function desativarProfissional(id: string) {
     try {
       await axios.patch(`http://localhost:4000/profissional/${id}`)
-      await getProfissionais()
+      toast.success("Profissional desativado.")
     } catch(erro) {
       console.log(erro)
       toast.error("Erro ao desativar profissional.")

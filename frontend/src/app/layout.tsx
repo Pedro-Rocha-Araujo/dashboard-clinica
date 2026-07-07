@@ -22,7 +22,7 @@ export default function RootLayout({
           <Dashboard />
           {children}
         </main>
-      <ToastContainer />
+      <ToastContainer autoClose={1000} />
       </body>
     </html>
   );

@@ -1,38 +1,16 @@
-'use client'
-
-import { useState, useEffect } from "react"
 import axios from "axios"
 import { toast } from "react-toastify"
+import { Profissional } from "../page"
 
-interface Profissional {
-  _id: string,
-  nome: string,
-  especialidade: string,
-  ativo: boolean
+interface ProfissionaisInativosProps {
+  profissionaisInativos: Profissional[]
 }
 
-export default function ProfissionaisInativos() {
-  const [profissionais, setProfissionais] = useState<Profissional[]>([])
-
-  async function getProfissionais() {
-    try {
-      const response = await axios.get("http://localhost:4000/profissional/inativos")
-      setProfissionais(response.data)
-    } catch(erro) {
-      console.log(erro)
-      toast.error("Erro ao buscar profissionais.")
-    }
-  }
-
-  useEffect(()=>{
-    getProfissionais()
-  }, [])
-
+export default function ProfissionaisInativos({ profissionaisInativos }: ProfissionaisInativosProps) {
   async function reativarProfissional(id: string) {
     try {
       await axios.patch(`http://localhost:4000/profissional/ativar/${id}`)
-      toast.success("Profissional reativado com sucesso")
-      await getProfissionais()
+      toast.success("Profissional Reativado.")
     } catch(erro) {
       console.log(erro)
       toast.error("Erro ao reativar o profissional.")
@@ -41,8 +19,8 @@ export default function ProfissionaisInativos() {
 
   return (
     <div className="profissionais inativos">
-      { profissionais.length > 0 ? (
-        profissionais.map((profissional)=> {
+      { profissionaisInativos.length > 0 ? (
+        profissionaisInativos.map((profissional)=> {
           return (
             <div key={profissional._id} className="profissional">
               <div className="informacoes">
