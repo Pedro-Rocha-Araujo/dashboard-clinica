@@ -2,6 +2,7 @@ div.profissionais {
   width: 98%;
   max-width: 1920px;
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   margin: 0.4rem 0 0.6rem 0;
 }

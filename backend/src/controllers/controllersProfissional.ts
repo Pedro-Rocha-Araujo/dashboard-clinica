@@ -81,3 +81,29 @@ export async function desativarProfissional(request:Request, response:Response):
     })
   }
 }
+
+export async function ativarProfissional(request:Request, response:Response):Promise<Response> {
+  try {
+    const { profissional_id } = request.params
+    if(!profissional_id) {
+      return response.status(400).json({ Erro: "Id do profissional não informado." })
+    }
+
+    const consulta = await ProfissionalModel.findById(profissional_id)
+
+    if(!consulta) {
+      return response.status(404).json({ Erro: "Profissional não encontrado." })
+    }
+
+    await ProfissionalModel.findByIdAndUpdate(profissional_id, {
+      ativo: true
+    })
+    
+    return response.status(200).json({ Mensagem: "Profissional reativado." })
+  } catch(erro) {
+    return response.status(500).json({ 
+      "Mensagem": "Erro ao listar os profissionais inativos",
+      "Erro": erro 
+    })
+  }
+}

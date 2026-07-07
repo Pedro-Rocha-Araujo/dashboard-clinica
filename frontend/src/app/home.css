@@ -7,7 +7,7 @@ section.home table {
 }
 
 section.home thead {
-  background-color: #555;
+  background-color: #161613;
   color: #fff;
 }
 
@@ -16,10 +16,14 @@ section.home th, td{
   padding: 0.4rem 0.8rem;
 }
 
+div.botoes {
+  display: flex;
+  justify-content: center;
+}
+
 section.home button {
   color: #fff;
   font-size: 0.95rem;
-  margin: 2px;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 1rem;
@@ -38,8 +42,7 @@ section.home button.red {
     margin: auto;
   }
 
-  div.botoes {
-    display: flex;
+  section.home div.botoes {
     flex-direction: column;
   }
 }
