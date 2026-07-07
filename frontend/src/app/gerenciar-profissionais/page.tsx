@@ -27,7 +27,6 @@ export default function GerenciarProfissionais() {
       toast.error("Erro ao buscar profissionais inativos.")
     }
   }
-
   async function getProfissionaisAtivos() {
     try {
       const response = await axios.get("http://localhost:4000/profissional/")
