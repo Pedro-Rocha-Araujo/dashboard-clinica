@@ -44,5 +44,6 @@ section.home button.red {
 
   section.home div.botoes {
     flex-direction: column;
+    gap: 0.2rem;
   }
 }
