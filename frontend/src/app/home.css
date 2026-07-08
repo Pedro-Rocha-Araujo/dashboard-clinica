@@ -19,6 +19,7 @@ section.home th, td{
 div.botoes {
   display: flex;
   justify-content: center;
+  gap: 0.2rem;
 }
 
 section.home button {
@@ -44,6 +45,5 @@ section.home button.red {
 
   section.home div.botoes {
     flex-direction: column;
-    gap: 0.2rem;
   }
 }

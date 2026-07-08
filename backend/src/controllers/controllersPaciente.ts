@@ -45,14 +45,14 @@ export async function getPaciente(request:Request, response:Response):Promise<Re
 
 export async function novoPaciente(request:Request<{}, {}, PacienteBody>, response:Response):Promise<Response> {
   try {
-    const { nome, cpf, telefone } = request.body
-    if(!nome || !cpf || !telefone) {
-      return response.status(400).json({ Erro: "Preencha todos os campos." })
+    const { nome } = request.body
+    if(!nome) {
+      return response.status(400).json({ Erro: "Nome não informado." })
     }
     await PacienteModel.create({
       nome: nome.trim(),
-      cpf: cpf,
-      telefone: telefone
+      cpf: 0,
+      telefone: 0
     })
     return response.status(201).json(`Paciente cadastrado com sucesso.`)
   } catch(erro) {

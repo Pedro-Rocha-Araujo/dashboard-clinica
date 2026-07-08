@@ -3,7 +3,6 @@
 import ProfissionaisAtivos from "./(profissionais)/Ativos"
 import ProfissionaisInativos from "./(profissionais)/Inativos"
 import axios from "axios"
-import { toast } from "react-toastify"
 import { useState, useEffect } from "react"
 import "./gerenciar-profissionais.css"
 
@@ -24,7 +23,6 @@ export default function GerenciarProfissionais() {
       setProfissionaisInativos(response.data)
     } catch(erro) {
       console.log(erro)
-      toast.error("Erro ao buscar profissionais inativos.")
     }
   }
   async function getProfissionaisAtivos() {
@@ -33,7 +31,6 @@ export default function GerenciarProfissionais() {
       setProfissionaisAtivos(response.data)
     } catch(erro) {
       console.log(erro)
-      toast.error("Erro ao buscar profissionais.")
     }
   }
 

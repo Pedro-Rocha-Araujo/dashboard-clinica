@@ -1,4 +1,5 @@
 import SenhaModel from "../models/Senha.js"
+import PacienteModel from "../models/Pacientes.js"
 import type { Request, Response } from "express"
 
 interface NovaSenhaBody {
@@ -11,6 +12,9 @@ interface EncaminhamentoParams {
 }
 
 interface EncaminhamentoBody {
+  nome: string,
+  cpf: number,
+  telefone: number,
   profissional_id: string
 }
 
@@ -33,15 +37,15 @@ export async function listarSenhas(_request:Request, response:Response):Promise<
 
 export async function novaSenha(request:Request<{},{},NovaSenhaBody>, response:Response):Promise<Response> {
   try {
-    const { paciente_id, profissional_id } = request.body
+    const { paciente_id } = request.body
     const inicio_dia = new Date()
     const final_dia = new Date()
 
     inicio_dia.setHours(0, 0, 0, 0)
     final_dia.setHours(23, 59, 59, 999)
 
-    if(!paciente_id || !profissional_id) {
-      return response.status(400).json({ Erro: "Campo(s) não informado(s)" })
+    if(!paciente_id) {
+      return response.status(400).json({ Erro: "Campo não informado." })
     }
     const consulta = await SenhaModel.findOne({
       createdAt: {
@@ -57,8 +61,7 @@ export async function novaSenha(request:Request<{},{},NovaSenhaBody>, response:R
     await SenhaModel.create({
       numero: maiorNumero,
       paciente: paciente_id,
-      status: "Aguardando",
-      profissional: profissional_id
+      status: "Aguardando"
     })
     
     return response.status(201).json({ Mensagem: "Senha criada com sucesso." })
@@ -75,8 +78,8 @@ export async function encaminharPaciente(
 ):Promise<Response> {
   try {
     const { senha_id } = request.params
-    const { profissional_id } = request.body
-    if(!senha_id || !profissional_id) {
+    const { nome, cpf, telefone, profissional_id } = request.body
+    if(!senha_id || !profissional_id || !nome || !cpf || !telefone) {
       return response.status(400).json({ Erro: "Campo(s) não informado(s)." })
     }
 
@@ -95,6 +98,9 @@ export async function encaminharPaciente(
 
     await SenhaModel.findByIdAndUpdate(senha_id, {
       status: "NaFila",
+      nome: nome,
+      cpf: cpf, 
+      telefone: telefone,
       profissional: profissional_id
     })
 
