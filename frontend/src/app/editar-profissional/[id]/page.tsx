@@ -20,8 +20,8 @@ export default function EditarProfissional() {
 
   const [profissional, setProfissional] = useState<Profissional | null>(null)
   
-  const nomeRef = useRef(null)
-  const especialidadeRef = useRef(null)
+  const nomeRef = useRef<HTMLInputElement>(null)
+  const especialidadeRef = useRef<HTMLInputElement>(null)
 
   async function getProfissional() {
     try {
@@ -38,12 +38,14 @@ export default function EditarProfissional() {
   }, [id])
 
 
-  async function editarProfissional() {
+  async function editarProfissional(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
     try {
       if(!nomeRef.current || !especialidadeRef.current) {
-        if(!nomeRef.current.value.trim() || !especialidadeRef.current.value.trim()) {
-          return toast.error("Preencha todos os campos.")
-        }
+        return
+      }
+      if(!nomeRef.current.value.trim() || !especialidadeRef.current.value.trim()) {
+        return toast.error("Preencha todos os campos.")
       }
       await axios.put(`http://localhost:4000/profissional/${id}`, {
         nome: nomeRef.current.value,
@@ -61,7 +63,7 @@ export default function EditarProfissional() {
     <section className="editar-profissional">
       <h2> <i className="fa-solid fa-pen-to-square"></i> Editar Profissional</h2>
       
-      <form className="editar-profissional" >
+      <form onSubmit={editarProfissional} className="editar-profissional" >
         <input 
           placeholder="Nome do Profissional"
           defaultValue={profissional?.nome}
