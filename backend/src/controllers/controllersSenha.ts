@@ -4,7 +4,8 @@ import type { Request, Response } from "express"
 
 interface NovaSenhaBody {
   paciente_id: string,
-  profissional_id: string
+  profissional_id: string,
+  nome: string
 }
 
 interface EncaminhamentoParams {
@@ -24,7 +25,7 @@ interface EncerramentoParams {
 
 export async function listarSenhas(_request:Request, response:Response):Promise<Response> {
   try { 
-    const listagem = await SenhaModel.find({ status: { $ne: "Aguardando" } })
+    const listagem = await SenhaModel.find({ status: { $eq: "Aguardando" } }).populate("paciente")
     return response.status(200).json(listagem)
   } catch(erro) {
     console.log(erro)
@@ -37,16 +38,21 @@ export async function listarSenhas(_request:Request, response:Response):Promise<
 
 export async function novaSenha(request:Request<{},{},NovaSenhaBody>, response:Response):Promise<Response> {
   try {
-    const { paciente_id } = request.body
+    const { nome } = request.body
     const inicio_dia = new Date()
     const final_dia = new Date()
 
     inicio_dia.setHours(0, 0, 0, 0)
     final_dia.setHours(23, 59, 59, 999)
 
-    if(!paciente_id) {
+    if(!nome.trim()) {
       return response.status(400).json({ Erro: "Campo não informado." })
     }
+
+    const paciente = await PacienteModel.create({
+      nome: nome.trim()
+    })
+
     const consulta = await SenhaModel.findOne({
       createdAt: {
         $gte: inicio_dia,
@@ -60,7 +66,7 @@ export async function novaSenha(request:Request<{},{},NovaSenhaBody>, response:R
     
     await SenhaModel.create({
       numero: maiorNumero,
-      paciente: paciente_id,
+      paciente: paciente._id,
       status: "Aguardando"
     })
     

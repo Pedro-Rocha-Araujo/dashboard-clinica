@@ -43,26 +43,6 @@ export async function getPaciente(request:Request, response:Response):Promise<Re
   }
 }
 
-export async function novoPaciente(request:Request<{}, {}, PacienteBody>, response:Response):Promise<Response> {
-  try {
-    const { nome } = request.body
-    if(!nome) {
-      return response.status(400).json({ Erro: "Nome não informado." })
-    }
-    await PacienteModel.create({
-      nome: nome.trim(),
-      cpf: 0,
-      telefone: 0
-    })
-    return response.status(201).json(`Paciente cadastrado com sucesso.`)
-  } catch(erro) {
-    return response.status(500).json({
-      Mensagem: "Erro ao cadastrar paciente",
-      Erro: erro
-    })
-  }
-}
-
 export async function deletarPaciente(request:Request<PacienteParams>, response:Response):Promise<Response> {
   try {
     const { paciente_id } = request.params
