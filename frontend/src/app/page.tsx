@@ -60,7 +60,7 @@ export default function Home() {
                     <td>{senha.paciente.nome}</td>
                     <td>{senha.status}</td>
                     <td>
-                      <Botoes />
+                      <Botoes id={senha._id} />
                     </td>
                   </tr>
               )
