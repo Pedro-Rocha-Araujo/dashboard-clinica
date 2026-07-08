@@ -45,6 +45,30 @@ export async function getProfissional(request:Request, response:Response):Promis
   }
 }
 
+export async function editarProfissional(request:Request, response:Response):Promise<Response> {
+  try {
+    const { profissional_id } = request.params
+    const { nome, especialidade } = request.body
+    if(!nome || !especialidade) {
+      return response.status(400).json({ Erro: "Todos os campos são obrigatórios." })
+    }
+    const consulta = await ProfissionalModel.findById(profissional_id)
+    if(!consulta) {
+      return response.status(404).json({ Erro: "Profissional não encontrado." })
+    }
+    await ProfissionalModel.findByIdAndUpdate(profissional_id, {
+      nome: nome,
+      especialidade: especialidade
+    })
+    return response.status(200).json({ Mensagem: "Profissional editado com sucesso." })
+  } catch(erro) {
+    return response.status(500).json({ 
+      "Mensagem": "Erro ao listar os profissionais inativos",
+      "Erro": erro 
+    })
+  }
+}
+
 export async function novoProfissional(request:Request, response:Response):Promise<Response> {
   try {
     const { nome, especialidade } = request.body

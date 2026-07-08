@@ -1,6 +1,6 @@
 'use client'
 import { useState, useRef, useEffect } from "react"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { toast } from "react-toastify"
 import axios from "axios"
 import "./editar-profissional.css"
@@ -14,8 +14,9 @@ interface Profissional {
 
 export default function EditarProfissional() {
   const params = useParams()
+  const router = useRouter()
+
   const id = params.id as String
-  console.log(id)
 
   const [profissional, setProfissional] = useState<Profissional | null>(null)
   
@@ -35,6 +36,26 @@ export default function EditarProfissional() {
   useEffect(()=> {
     getProfissional()
   }, [id])
+
+
+  async function editarProfissional() {
+    try {
+      if(!nomeRef.current || !especialidadeRef.current) {
+        if(!nomeRef.current.value.trim() || !especialidadeRef.current.value.trim()) {
+          return toast.error("Preencha todos os campos.")
+        }
+      }
+      await axios.put(`http://localhost:4000/profissional/${id}`, {
+        nome: nomeRef.current.value,
+        especialidade: especialidadeRef.current.value
+      })
+      toast.success("Profissional Editado.")
+      router.replace("/gerenciar-profissionais")
+    } catch(erro) {
+      console.log(erro)
+      toast.error("Erro ao editar o Profissional.")
+    }
+  }
 
   return (
     <section className="editar-profissional">
