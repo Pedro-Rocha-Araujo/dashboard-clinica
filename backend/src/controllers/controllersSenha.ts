@@ -165,3 +165,25 @@ export async function encerrarAtendimento(request:Request<EncerramentoParams>, r
     })
   }
 }
+
+export async function cancelarAtendimento(request:Request, response:Response):Promise<Response> {
+  try {
+    const { senha_id } = request.params
+    if(!senha_id) {
+      return response.status(400).json({ Erro: "Id não informado." })
+    }
+    const consulta = await SenhaModel.findById(senha_id) 
+    if(!consulta) {
+      return response.status(404).json({ Erro: "Senha não encontrada." })
+    }
+    await SenhaModel.findByIdAndUpdate(senha_id, {
+      status: "Cancelado"
+    })
+    return response.status(200).json({ Mensagem: "Atendimento cancelado." })
+  } catch(erro) {
+    return response.status(500).json({ 
+      Mensagem: "Erro ao finalizar atendimento.",
+      Erro: erro
+    })
+  }
+}
