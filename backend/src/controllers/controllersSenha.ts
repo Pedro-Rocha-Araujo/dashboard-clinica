@@ -81,7 +81,7 @@ export async function novaSenha(request:Request<{},{},NovaSenhaBody>, response:R
 
 export async function encaminharPaciente(
   request:Request<EncaminhamentoParams,{},EncaminhamentoBody>, response:Response
-):Promise<Response> {
+  ):Promise<Response> {
   try {
     const { senha_id } = request.params
     const { nome, cpf, telefone, profissional_id } = request.body
