@@ -1,0 +1,49 @@
+section.senhas-profissional table {
+  width: 100%;
+  max-width: 1080px;
+  font-size: clamp(0.8rem, 3vw, 1.1rem);
+  border-collapse: collapse;
+  text-align: center;
+}
+
+section.senhas-profissional thead {
+  background-color: #161613;
+  color: #fff;
+}
+
+section.senhas-profissional th, td{
+  border: 1px solid black;
+  padding: 0.4rem 0.8rem;
+}
+
+section.senhas-profissional button {
+  color: #fff;
+  font-size: 0.95rem;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+}
+
+section.senhas-profissional div.botoes {
+  display: flex;
+  gap: 0.2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+section.senhas-profissional button.red {
+  background-color: #bb2323;
+}
+
+section.senhas-profissional button.blue {
+  background-color: #2372d2;
+}
+
+@media screen and (max-width: 980px) {
+  table {
+    margin: auto;
+  }
+  section.senhas-profissional div.botoes {
+    flex-direction: column;
+  }
+}
