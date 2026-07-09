@@ -16,7 +16,7 @@ interface EncaminhamentoBody {
   nome: string,
   cpf: number,
   telefone: number,
-  profissional_id: string
+  profissional_id: string,
 }
 
 interface EncerramentoParams {
@@ -28,9 +28,24 @@ export async function listarSenhas(_request:Request, response:Response):Promise<
     const listagem = await SenhaModel.find({ status: { $eq: "Aguardando" } }).populate("paciente")
     return response.status(200).json(listagem)
   } catch(erro) {
-    console.log(erro)
     return response.status(500).json({ 
       Mensagem: "Erro ao listar as senhas",
+      Erro: erro
+    })
+  }
+}
+
+export async function getSenha(request:Request, response:Response):Promise<Response> {
+  try {
+    const { senha_id } = request.params
+    const consulta = await SenhaModel.findById(senha_id).populate("paciente").populate("profissional")
+    if(!consulta) {
+      return response.status(404).json({ Erro: "Senha não encontrada" })
+    }
+    return response.status(200).json(consulta)
+  } catch(erro) {
+    return response.status(500).json({ 
+      Mensagem: "Erro ao listar as senha",
       Erro: erro
     })
   }
@@ -102,11 +117,14 @@ export async function encaminharPaciente(
       return response.status(404).json({ Erro: "Senha não encontrada." })
     }
 
-    await SenhaModel.findByIdAndUpdate(senha_id, {
-      status: "NaFila",
+    await PacienteModel.findByIdAndUpdate(validacao.paciente, {
       nome: nome,
       cpf: cpf, 
       telefone: telefone,
+    })
+
+    await SenhaModel.findByIdAndUpdate(senha_id, {
+      status: "NaFila",
       profissional: profissional_id
     })
 

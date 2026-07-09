@@ -1,6 +1,7 @@
 import { Router } from "express"
 import { 
   listarSenhas,
+  getSenha,
   novaSenha,
   encaminharPaciente,
   encerrarAtendimento
@@ -9,6 +10,7 @@ import {
 const rotasSenha = Router()
 
 rotasSenha.get("/senha", listarSenhas)
+rotasSenha.get("/senha/:senha_id", getSenha) 
 rotasSenha.post("/senha", novaSenha)
 rotasSenha.patch("/senha/:senha_id/encaminhamento", encaminharPaciente)
 rotasSenha.patch("/senha/:senha_id", encerrarAtendimento)
