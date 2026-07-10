@@ -201,7 +201,7 @@ export async function senhasProfissional(request:Request, response:Response):Pro
     }
     const listagem = await SenhaModel.find({
       profissional: profissional_id
-    }).populate("Profissional").populate("Paciente")
+    }).populate("profissional").populate("paciente")
     return response.status(200).json(listagem)
   } catch(erro) {
     return response.status(500).json({ 

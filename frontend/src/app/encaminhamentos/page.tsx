@@ -1,10 +1,35 @@
 'use client'
 
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
+import axios from "axios"
 import "./encaminhamentos.css"
+
+interface Profissional {
+  _id: string,
+  nome: string,
+  especialidade: string,
+  ativo: boolean
+}
 
 export default function Encaminhamentos() {
   const router = useRouter()
+
+  const [profissionais, setProfissionais] = useState<Profissional[]>()
+
+  useEffect(()=>{
+    async function getProfissionais() {
+      try {
+        const response = await axios.get("http://localhost:4000/profissional")
+        setProfissionais(response.data)
+      } catch(erro) {
+        console.log(erro)
+      }
+    }
+    getProfissionais()
+  }, [])
+
+
 
   function direcionarSenhaProfissional(id: string) {
     router.push(`/encaminhamentos/${id}`)
@@ -16,13 +41,17 @@ export default function Encaminhamentos() {
 
       <div className="profissionais">
 
-          <div onClick={()=>direcionarSenhaProfissional("id-profissioal")} className="profissional pop">
-            <div className="informacoes">
-              <h3>profissional.nome</h3>
-              <p>profissional.especialidade</p>
+        {profissionais?.map((profissional)=>{
+          return (
+            <div key={profissional._id} onClick={()=>direcionarSenhaProfissional(profissional._id)} className="profissional pop">
+              <div className="informacoes">
+                <h3>{profissional.nome}</h3>
+                <p>{profissional.especialidade}</p>
+              </div>
+              <i className="fa-solid fa-eye fa-xl"></i>
             </div>
-            <i className="fa-solid fa-eye fa-xl"></i>
-          </div>
+          )
+        })}
 
       </div>
     </section>
