@@ -1,4 +1,5 @@
 import SenhaModel from "../models/Senha.js"
+import ProfissionalModel from "../models/Profissional.js"
 import PacienteModel from "../models/Pacientes.js"
 import type { Request, Response } from "express"
 
@@ -182,7 +183,29 @@ export async function cancelarAtendimento(request:Request, response:Response):Pr
     return response.status(200).json({ Mensagem: "Atendimento cancelado." })
   } catch(erro) {
     return response.status(500).json({ 
-      Mensagem: "Erro ao finalizar atendimento.",
+      Mensagem: "Erro ao cancelar atendimento.",
+      Erro: erro
+    })
+  }
+}
+
+export async function senhasProfissional(request:Request, response:Response):Promise<Response> {
+  try {
+    const { profissional_id } = request.params
+    if(!profissional_id) {
+      return response.status(400).json({ Erro: "Profissional não informado." })
+    }
+    const consulta = await ProfissionalModel.findById(profissional_id)
+    if(!consulta) {
+      return response.status(404).json({ Erro: "Profissional não encontrado." })
+    }
+    const listagem = await SenhaModel.find({
+      profissional: profissional_id
+    }).populate("Profissional").populate("Paciente")
+    return response.status(200).json(listagem)
+  } catch(erro) {
+    return response.status(500).json({ 
+      Mensagem: "Erro ao buscar a senha do profissional.",
       Erro: erro
     })
   }
