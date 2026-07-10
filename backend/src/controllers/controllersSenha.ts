@@ -24,8 +24,23 @@ interface EncerramentoParams {
   senha_id: string
 }
 
+async function cancelarSenhas():Promise<void> {
+  const hoje = new Date()
+  hoje.setHours(0, 0, 0, 0)
+  await SenhaModel.updateMany(
+    {
+      createdAt: { $lt: hoje },
+      status: { $in: ["Aguardando", "NaFila"] }
+    },
+    {
+      status: "Cancelado"
+    }
+  )
+}
+
 export async function listarSenhas(_request:Request, response:Response):Promise<Response> {
   try { 
+    await cancelarSenhas()
     const listagem = await SenhaModel.find({ status: { $eq: "Aguardando" } }).populate("paciente")
     return response.status(200).json(listagem)
   } catch(erro) {
@@ -47,6 +62,29 @@ export async function getSenha(request:Request, response:Response):Promise<Respo
   } catch(erro) {
     return response.status(500).json({ 
       Mensagem: "Erro ao listar as senha",
+      Erro: erro
+    })
+  }
+}
+
+export async function senhasProfissional(request:Request, response:Response):Promise<Response> {
+  try {
+    const { profissional_id } = request.params
+    if(!profissional_id) {
+      return response.status(400).json({ Erro: "Profissional não informado." })
+    }
+    const consulta = await ProfissionalModel.findById(profissional_id)
+    if(!consulta) {
+      return response.status(404).json({ Erro: "Profissional não encontrado." })
+    }
+    const listagem = await SenhaModel.find({
+      profissional: profissional_id,
+      status: "NaFila"
+    }).populate("profissional").populate("paciente")
+    return response.status(200).json(listagem)
+  } catch(erro) {
+    return response.status(500).json({ 
+      Mensagem: "Erro ao buscar a senha do profissional.",
       Erro: erro
     })
   }
@@ -184,28 +222,6 @@ export async function cancelarAtendimento(request:Request, response:Response):Pr
   } catch(erro) {
     return response.status(500).json({ 
       Mensagem: "Erro ao cancelar atendimento.",
-      Erro: erro
-    })
-  }
-}
-
-export async function senhasProfissional(request:Request, response:Response):Promise<Response> {
-  try {
-    const { profissional_id } = request.params
-    if(!profissional_id) {
-      return response.status(400).json({ Erro: "Profissional não informado." })
-    }
-    const consulta = await ProfissionalModel.findById(profissional_id)
-    if(!consulta) {
-      return response.status(404).json({ Erro: "Profissional não encontrado." })
-    }
-    const listagem = await SenhaModel.find({
-      profissional: profissional_id
-    }).populate("profissional").populate("paciente")
-    return response.status(200).json(listagem)
-  } catch(erro) {
-    return response.status(500).json({ 
-      Mensagem: "Erro ao buscar a senha do profissional.",
       Erro: erro
     })
   }

@@ -6,7 +6,7 @@ import {
   novaSenha,
   encaminharPaciente,
   encerrarAtendimento,
-  cancelarAtendimento,
+  cancelarAtendimento
 } from "../controllers/controllersSenha.js"
 
 const rotasSenha = Router()
