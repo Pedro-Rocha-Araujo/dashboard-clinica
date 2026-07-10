@@ -21,6 +21,7 @@ div.profissional {
 
 div.pop {
   transition: all 0.2s;
+  cursor: pointer;
 }
 
 div.pop:hover {

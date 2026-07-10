@@ -1,6 +1,56 @@
+'use client'
+
+import { useState, useEffect } from "react"
+import { useParams } from "next/navigation"
+import axios from "axios"
 import "./senhas-profissional.css"
 
+interface Profissional {
+  _id: string,
+  nome: string,
+  ativo: boolean,
+  especialidade: string,
+  createdAt: string,
+  updatedAt: string
+}
+
+interface Paciente {
+  _id: string,
+  nome: string,
+  cpf: number,
+  telefone: number,
+  createdAt: string,
+  updatedAt: string
+}
+
+interface Senha {
+  _id: string,
+  numero: number,
+  status: "Aguardando" | "NaFila" | "Finalizado" | "Cancelado"
+  profissional: Profissional,
+  paciente: Paciente,
+  createdAt: string,
+  updatedAt: string
+}
+
 export default function SenhasProfissional() {
+  const params = useParams()
+  const { id } = params
+
+  const [senhas, setSenhas] = useState<Senha[]>([])
+
+  useEffect(()=>{
+    async function getSenhas() {
+      try {
+         const response = await axios.get(`http://localhost:4000/senha/profissional/${id}`)
+         setSenhas(response.data)
+      } catch(erro) {
+        console.log(erro)
+      }
+    }
+    getSenhas()
+  },[])
+
   return (
     <section className="senhas-profissional">
       <h2> <i className="fa-solid fa-list-ol"></i> Senhas | Nome do Profissional</h2>
@@ -17,17 +67,29 @@ export default function SenhasProfissional() {
         </thead>
 
         <tbody>
-          <tr key={"senha._id"}>
-            <td>senha.numero</td>
-            <td>senha.paciente.nome</td>
-            <td>senha.status</td>
-            <td>
-              <div className="botoes">
-                <button className="blue">Finalizar</button>
-                <button className="red">Encerrar</button>
-              </div>
-            </td>
-          </tr>
+          { senhas.length > 0 ? (
+            senhas.map((senha)=>{
+              return (
+                <tr key={senha._id}>
+                  <td>{senha.numero}</td>
+                  <td>{senha.paciente.nome}</td>
+                  <td>{senha.status}</td>
+                  <td>
+                    <div className="botoes">
+                      <button className="blue">Finalizar</button>
+                      <button className="red">Encerrar</button>
+                    </div>
+                  </td>
+                </tr>
+              )
+            })
+          ): (
+            <tr>
+              <td colSpan={100}>
+                <p>Nenhum paciente até o momento</p>
+              </td>
+            </tr>
+          ) }
         </tbody>
 
       </table>
