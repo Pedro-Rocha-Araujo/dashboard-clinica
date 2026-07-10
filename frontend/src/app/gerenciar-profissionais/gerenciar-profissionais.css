@@ -43,3 +43,14 @@ div.botoes i {
 div.inativos div.profissional {
   background-color: #ccc;
 }
+
+
+@media screen and (max-width: 980px) {
+  section.gerenciar-profissionais h3 {
+    text-align: center;
+  }
+  
+  div.profissionais {
+    justify-content: center;
+  }
+}
