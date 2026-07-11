@@ -38,7 +38,8 @@ export default function SenhasProfissional() {
   const { id } = params
 
   const [senhas, setSenhas] = useState<Senha[]>([])
-
+  const [profissional, setProfissional] = useState<Profissional>()
+  
   useEffect(()=>{
     async function getSenhas() {
       try {
@@ -51,9 +52,21 @@ export default function SenhasProfissional() {
     getSenhas()
   },[])
 
+  useEffect(()=>{
+    async function getProfisisonal() {
+      try {
+        const response = await axios.get(`http://localhost:4000/profissional/${id}`)
+        setProfissional(response.data)
+      } catch(erro) {
+        console.log(erro)
+      }
+    }
+    getProfisisonal()
+  } , [id])
+
   return (
     <section className="senhas-profissional">
-      <h2> <i className="fa-solid fa-list-ol"></i> Senhas | Nome do Profissional</h2>
+      <h2> <i className="fa-solid fa-list-ol"></i> {profissional?.nome} | Senhas</h2>
 
       <table>
         <thead>
