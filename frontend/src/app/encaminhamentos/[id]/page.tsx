@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { useParams } from "next/navigation"
 import axios from "axios"
+import { toast } from "react-toastify"
 import "./senhas-profissional.css"
 
 interface Profissional {
@@ -64,6 +65,16 @@ export default function SenhasProfissional() {
     getProfisisonal()
   } , [id])
 
+  async function finalizarAtendimento(id: string) {
+    try {
+      await axios.patch(`http://localhost:4000/senha/${id}`)
+      toast.success("Atendimento finalizado com sucesso.")
+    } catch(erro){
+      console.log(erro)
+      toast.error("Erro ao finalizar o atendimento.")
+    }
+  }
+
   return (
     <section className="senhas-profissional">
       <h2> <i className="fa-solid fa-list-ol"></i> {profissional?.nome} | Senhas</h2>
@@ -89,8 +100,12 @@ export default function SenhasProfissional() {
                   <td>{senha.status}</td>
                   <td>
                     <div className="botoes">
-                      <button className="blue">Finalizar</button>
-                      <button className="red">Encerrar</button>
+                      <button onClick={()=>finalizarAtendimento(senha._id)} className="blue">
+                        Finalizar
+                      </button>
+                      <button className="red">
+                        Encerrar
+                      </button>
                     </div>
                   </td>
                 </tr>
