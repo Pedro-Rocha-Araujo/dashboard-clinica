@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from "react"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import axios from "axios"
 import { toast } from "react-toastify"
 import "./senhas-profissional.css"
@@ -38,6 +38,8 @@ export default function SenhasProfissional() {
   const params = useParams()
   const { id } = params
 
+  const router = useRouter()
+
   const [senhas, setSenhas] = useState<Senha[]>([])
   const [profissional, setProfissional] = useState<Profissional>()
   
@@ -68,10 +70,22 @@ export default function SenhasProfissional() {
   async function finalizarAtendimento(id: string) {
     try {
       await axios.patch(`http://localhost:4000/senha/${id}`)
-      toast.success("Atendimento finalizado com sucesso.")
+      toast.success("Atendimento finalizado.")
+      router.replace("/encaminhamentos/"+id)
     } catch(erro){
       console.log(erro)
       toast.error("Erro ao finalizar o atendimento.")
+    }
+  }
+
+  async function cancelarAtendimento(id: string) {
+    try {
+      await axios.patch(`http://localhost:4000/senha/${id}/cancelar`)
+      toast.success("Atendimento cancelado.")
+      router.replace("/encaminhamentos/"+id)
+    } catch(erro){
+      console.log(erro)
+      toast.error("Erro ao cancelar o atendimento.")
     }
   }
 
@@ -103,8 +117,8 @@ export default function SenhasProfissional() {
                       <button onClick={()=>finalizarAtendimento(senha._id)} className="blue">
                         Finalizar
                       </button>
-                      <button className="red">
-                        Encerrar
+                      <button onClick={()=>cancelarAtendimento(senha._id)} className="red">
+                        Cancelar
                       </button>
                     </div>
                   </td>
