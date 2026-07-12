@@ -66,9 +66,11 @@ main nav ul {
 }
 
 main nav ul li button {
+  color: #fff;
   display: none;
   background-color: transparent;
-  color: #fff;
+  border: none;
+  padding: 0;
 }
 
 main section {

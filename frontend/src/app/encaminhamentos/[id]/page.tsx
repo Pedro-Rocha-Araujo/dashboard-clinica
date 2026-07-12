@@ -81,10 +81,10 @@ export default function SenhasProfissional() {
             senhas.map((senha)=>{
               return (
                 <tr key={senha._id}>
-                  <td>{senha.numero}</td>
-                  <td>{senha.paciente.nome}</td>
-                  <td>{senha.status}</td>
-                  <td>
+                  <td data-label="Senha">{senha.numero}</td>
+                  <td data-label="Paciente">{senha.paciente.nome}</td>
+                  <td data-label="Status">{senha.status}</td>
+                  <td data-label="Funcionalidades">
                     <div className="botoes">
                       <button onClick={()=>finalizarAtendimento(senha._id)} className="blue">
                         Finalizar

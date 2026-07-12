@@ -40,10 +40,10 @@ export default function Home() {
             senhas.map((senha)=>{
               return (
                   <tr key={senha._id}>
-                    <td>{senha.numero}</td>
-                    <td>{senha.paciente.nome}</td>
-                    <td>{senha.status}</td>
-                    <td>
+                    <td data-label="Senha:">{senha.numero}</td>
+                    <td data-label="Paciente:">{senha.paciente.nome}</td>
+                    <td data-label="Status:">{senha.status}</td>
+                    <td data-label="Funcionalidades:">
                       <Botoes id={senha._id} />
                     </td>
                   </tr>
