@@ -16,7 +16,7 @@ section.home th, td{
   padding: 0.4rem 0.8rem;
 }
 
-div.botoes {
+section.home div.botoes, section.senhas-profissional div.botoes {
   display: flex;
   justify-content: center;
   gap: 0.2rem;
@@ -24,7 +24,7 @@ div.botoes {
 
 section.home button {
   color: #fff;
-  font-size: 0.95rem;
+  font-size: clamp(0.8rem, 3vw, 1rem);
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 1rem;
@@ -51,7 +51,7 @@ section.home button.red {
     border: none;
   }
 
-  div.botoes {
+  section.home div.botoes, section.senhas-profissional div.botoes {
     flex-direction: column;
     float: right;
   }

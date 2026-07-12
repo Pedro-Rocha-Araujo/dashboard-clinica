@@ -38,7 +38,7 @@ export default function Encaminhamentos() {
           return (
             <div key={profissional._id} onClick={()=>direcionarSenhaProfissional(profissional._id)} className="profissional pop">
               <div className="informacoes">
-                <h3>{profissional.nome}</h3>
+                <h4>{profissional.nome}</h4>
                 <p>{profissional.especialidade}</p>
               </div>
               <i className="fa-solid fa-eye fa-xl"></i>

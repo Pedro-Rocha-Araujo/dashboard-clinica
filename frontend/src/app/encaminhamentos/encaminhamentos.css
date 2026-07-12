@@ -29,9 +29,5 @@ div.pop:hover {
 }
 
 section.gerenciar-profissionais h3 {
-  font-size: clamp(1rem, 4vw, 1.4rem);
-}
-
-div.profissional p {
-  font-size: clamp(1rem, 2vw, 1.05rem);
+  margin: 0.8rem 0;
 }
