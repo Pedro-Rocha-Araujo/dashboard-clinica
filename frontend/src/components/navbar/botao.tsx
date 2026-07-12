@@ -2,7 +2,7 @@
 
 interface BotaoProps {
   menu: boolean,
-  gerenciarMenu: Function
+  gerenciarMenu: () => void
 }
 
 export default function Botao({ menu, gerenciarMenu }: BotaoProps) {
