@@ -1,28 +1,12 @@
 'use client'
-
-interface Paciente {
-  _id: string,
-  nome: string,
-  createdAt: string,
-  updatedAt: string
-}
-
-interface SenhaAguardando {
-  _id: string,
-  numero: number,
-  paciente: Paciente,
-  status: "Aguardando" | "NaFila" | "Finalizado" | "Cancelado",
-  createdAt: string,
-  updatedAt: string
-}
-
+import { Senha } from "@/interfaces"
 import { useState, useEffect } from "react"
 import axios from "axios"
 import Botoes from "../components/botoes-home/page"
 import "./home.css"
 
 export default function Home() {
-  const [senhas, setSenhas] = useState<SenhaAguardando[]>([])
+  const [senhas, setSenhas] = useState<Senha[]>([])
 
   async function getSenhas() {
     try {

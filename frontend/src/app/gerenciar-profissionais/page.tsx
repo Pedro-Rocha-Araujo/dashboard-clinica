@@ -1,17 +1,11 @@
 'use client'
 
+import { Profissional } from "@/interfaces"
 import ProfissionaisAtivos from "./(profissionais)/Ativos"
 import ProfissionaisInativos from "./(profissionais)/Inativos"
 import axios from "axios"
 import { useState, useEffect } from "react"
 import "./gerenciar-profissionais.css"
-
-export interface Profissional {
-  _id: string,
-  nome: string,
-  especialidade: string,
-  ativo: boolean
-}
 
 export default function GerenciarProfissionais() {
   const [profissionaisAtivos, setProfissionaisAtivos] = useState<Profissional[]>([])

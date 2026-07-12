@@ -1,6 +1,6 @@
 import axios from "axios"
 import { toast } from "react-toastify"
-import { Profissional } from "../page"
+import { Profissional } from "@/interfaces"
 
 interface ProfissionaisInativosProps {
   profissionaisInativos: Profissional[]

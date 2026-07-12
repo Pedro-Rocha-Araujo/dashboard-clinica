@@ -1,38 +1,11 @@
 'use client'
 
+import { Profissional, Senha } from "@/interfaces"
 import { useState, useRef, useEffect } from "react"
 import { useParams, useRouter } from "next/navigation"
 import axios from "axios"
 import { toast } from "react-toastify"
 import "./encaminhamento.css"
-
-interface Profissional {
-  _id: string,
-  nome: string,
-  ativo: boolean,
-  especialidade: string,
-  createdAt: string,
-  updatedAt: string
-}
-
-interface Paciente {
-  _id: string,
-  nome: string,
-  cpf: number,
-  telefone: number,
-  createdAt: string,
-  updatedAt: string
-}
-
-interface Senha {
-  _id: string,
-  numero: number,
-  status: "Aguardando" | "NaFila" | "Finalizado" | "Cancelado"
-  profissional: Profissional,
-  paciente: Paciente,
-  createdAt: string,
-  updatedAt: string
-}
 
 export default function Encaminhamento() {
   const params = useParams()

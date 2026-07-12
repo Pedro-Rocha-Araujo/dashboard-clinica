@@ -1,16 +1,10 @@
 'use client'
+import { Profissional } from "@/interfaces"
 import { useState, useRef, useEffect } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { toast } from "react-toastify"
 import axios from "axios"
 import "./editar-profissional.css"
-
-interface Profissional {
-  _id: string,
-  nome: string,
-  ativo: boolean,
-  especialidade: string
-}
 
 export default function EditarProfissional() {
   const params = useParams()

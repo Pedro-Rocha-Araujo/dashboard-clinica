@@ -1,16 +1,9 @@
 'use client'
-
+import { Profissional } from "@/interfaces"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import axios from "axios"
 import "./encaminhamentos.css"
-
-interface Profissional {
-  _id: string,
-  nome: string,
-  especialidade: string,
-  ativo: boolean
-}
 
 export default function Encaminhamentos() {
   const router = useRouter()

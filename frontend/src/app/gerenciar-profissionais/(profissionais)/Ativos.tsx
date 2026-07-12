@@ -1,5 +1,5 @@
 import Botoes from "../(botoes)/page"
-import { Profissional } from "../page"
+import { Profissional } from "@/interfaces"
 
 interface ProfissionaisAtivosProps {
   profissionaisAtivos: Profissional[]
