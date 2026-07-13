@@ -7,7 +7,7 @@ section.home table {
 }
 
 section.home thead {
-  background-color: #161613;
+  background-color: #2a2829;
   color: #fff;
 }
 
@@ -41,6 +41,10 @@ section.home button.red {
 @media screen and (max-width: 980px) {
   table {
     margin: auto;
+  }
+
+  table p {
+    text-align: center;
   }
 
   table thead {
