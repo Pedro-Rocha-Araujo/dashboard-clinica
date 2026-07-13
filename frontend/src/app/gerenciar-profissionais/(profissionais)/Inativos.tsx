@@ -11,6 +11,9 @@ export default function ProfissionaisInativos({ profissionaisInativos }: Profiss
     try {
       await axios.patch(`http://localhost:4000/profissional/ativar/${id}`)
       toast.success("Profissional Reativado.")
+      profissionaisInativos.filter((i)=>{
+        return i._id !== id
+      })
     } catch(erro) {
       console.log(erro)
       toast.error("Erro ao reativar o profissional.")

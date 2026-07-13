@@ -1,8 +1,9 @@
 import { redirect } from "next/navigation"
 import axios from "axios"
 import { toast } from "react-toastify"
+
 interface BotoesProps {
-  id: string,
+  id: string
 }
 
 export default function Botoes({ id }: BotoesProps) {
@@ -11,6 +12,7 @@ export default function Botoes({ id }: BotoesProps) {
     try {
       await axios.patch(`http://localhost:4000/profissional/${id}`)
       toast.success("Profissional desativado.")
+      
     } catch(erro) {
       console.log(erro)
       toast.error("Erro ao desativar profissional.")
