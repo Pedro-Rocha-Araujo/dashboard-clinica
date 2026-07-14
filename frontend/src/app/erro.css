@@ -1,0 +1,25 @@
+section.erro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+section.erro button {
+  background-color: #2a2829;
+  color: #fff;
+  font-size: clamp(0.8rem, 4vw, 1rem);
+  margin-top: 1rem;
+  padding: 0.8rem 1.8rem;
+  border-radius: 1.5rem;
+}
+
+section.erro p {
+  text-align: center;
+}
+
+@media screen and (max-width: 980px) {
+  section.erro {
+    margin-top: 2rem;
+  }
+}
