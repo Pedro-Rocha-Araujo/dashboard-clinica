@@ -2,27 +2,14 @@ import SenhaModel from "../models/Senha.js"
 import ProfissionalModel from "../models/Profissional.js"
 import PacienteModel from "../models/Pacientes.js"
 import type { Request, Response } from "express"
-
-interface NovaSenhaBody {
-  paciente_id: string,
-  profissional_id: string,
-  nome: string
-}
-
-interface EncaminhamentoParams {
-  senha_id: string
-}
-
-interface EncaminhamentoBody {
-  nome: string,
-  cpf: number,
-  telefone: number,
-  profissional_id: string,
-}
-
-interface EncerramentoParams {
-  senha_id: string
-}
+import type {
+  SenhaBody,
+  SenhaParams,
+  EncaminhamentoBody
+} from "../interfaces/interfacesSenha.js"
+import type {
+  ProfissionalParams
+} from "../interfaces/interfacesProfissional.js"
 
 async function cancelarSenhas():Promise<void> {
   const hoje = new Date()
@@ -41,7 +28,7 @@ async function cancelarSenhas():Promise<void> {
 export async function listarSenhas(_request:Request, response:Response):Promise<Response> {
   try { 
     await cancelarSenhas()
-    const listagem = await SenhaModel.find({ status: { $eq: "Aguardando" } }).populate("paciente")
+    const listagem = await SenhaModel.find({ status: "Aguardando" }).sort({ numero: 1 }).populate("paciente")
     return response.status(200).json(listagem)
   } catch(erro) {
     return response.status(500).json({ 
@@ -51,7 +38,9 @@ export async function listarSenhas(_request:Request, response:Response):Promise<
   }
 }
 
-export async function getSenha(request:Request, response:Response):Promise<Response> {
+export async function getSenha(
+  request:Request<SenhaParams>, response:Response
+):Promise<Response> {
   try {
     const { senha_id } = request.params
     const consulta = await SenhaModel.findById(senha_id).populate("paciente").populate("profissional")
@@ -67,12 +56,11 @@ export async function getSenha(request:Request, response:Response):Promise<Respo
   }
 }
 
-export async function senhasProfissional(request:Request, response:Response):Promise<Response> {
+export async function senhasProfissional(
+  request:Request<ProfissionalParams>, response:Response
+):Promise<Response> {
   try {
     const { profissional_id } = request.params
-    if(!profissional_id) {
-      return response.status(400).json({ Erro: "Profissional não informado." })
-    }
     const consulta = await ProfissionalModel.findById(profissional_id)
     if(!consulta) {
       return response.status(404).json({ Erro: "Profissional não encontrado." })
@@ -80,7 +68,7 @@ export async function senhasProfissional(request:Request, response:Response):Pro
     const listagem = await SenhaModel.find({
       profissional: profissional_id,
       status: "NaFila"
-    }).populate("profissional").populate("paciente")
+    }).sort({ numero: 1 }).populate("profissional").populate("paciente")
     return response.status(200).json(listagem)
   } catch(erro) {
     return response.status(500).json({ 
@@ -90,7 +78,7 @@ export async function senhasProfissional(request:Request, response:Response):Pro
   }
 }
 
-export async function novaSenha(request:Request<{},{},NovaSenhaBody>, response:Response):Promise<Response> {
+export async function novaSenha(request:Request<{},{},SenhaBody>, response:Response):Promise<Response> {
   try {
     const { nome } = request.body
     const inicio_dia = new Date()
@@ -134,7 +122,7 @@ export async function novaSenha(request:Request<{},{},NovaSenhaBody>, response:R
 }
 
 export async function encaminharPaciente(
-  request:Request<EncaminhamentoParams,{},EncaminhamentoBody>, response:Response
+  request:Request<SenhaParams,{},EncaminhamentoBody>, response:Response
   ):Promise<Response> {
   try {
     const { senha_id } = request.params
@@ -157,7 +145,7 @@ export async function encaminharPaciente(
     }
 
     await PacienteModel.findByIdAndUpdate(validacao.paciente, {
-      nome: nome,
+      nome: nome.trim(),
       cpf: cpf, 
       telefone: telefone,
     })
@@ -176,12 +164,9 @@ export async function encaminharPaciente(
   }
 }
 
-export async function encerrarAtendimento(request:Request<EncerramentoParams>, response:Response) {
+export async function encerrarAtendimento(request:Request<SenhaParams>, response:Response) {
   try {
     const { senha_id } = request.params
-    if(!senha_id) {
-      return response.status(400).json({ Erro: "Id da senha não informado." })
-    }
     const validacao = await SenhaModel.findById(senha_id)
 
     if(!validacao) {
@@ -208,16 +193,12 @@ export async function encerrarAtendimento(request:Request<EncerramentoParams>, r
 export async function cancelarAtendimento(request:Request, response:Response):Promise<Response> {
   try {
     const { senha_id } = request.params
-    if(!senha_id) {
-      return response.status(400).json({ Erro: "Id não informado." })
-    }
-    const consulta = await SenhaModel.findById(senha_id) 
-    if(!consulta) {
-      return response.status(404).json({ Erro: "Senha não encontrada." })
-    }
-    await SenhaModel.findByIdAndUpdate(senha_id, {
+    const senha = await SenhaModel.findByIdAndUpdate(senha_id, {
       status: "Cancelado"
     })
+    if(!senha) {
+      return response.status(404).json({ Erro: "Senha não encontrada" })
+    }
     return response.status(200).json({ Mensagem: "Atendimento cancelado." })
   } catch(erro) {
     return response.status(500).json({ 
