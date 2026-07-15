@@ -2,7 +2,7 @@
 import { Senha } from "@/interfaces"
 import { useState, useEffect } from "react"
 import axios from "axios"
-import Botoes from "../components/botoes-home/page"
+import Botoes from "../../components/botoes-home/page"
 import "./home.css"
 
 export default function Home() {

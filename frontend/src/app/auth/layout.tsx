@@ -1,9 +1,4 @@
-import { ToastContainer } from "react-toastify";
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import "./globals.css";
 import { Metadata } from "next";
-
-import Dashboard from "../components/navbar/page"
 
 export const metadata:Metadata = {
   title: 'Clínica | Atendimento',
@@ -20,10 +15,8 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body>
         <main>
-          <Dashboard />
           {children}
         </main>
-      <ToastContainer autoClose={1000} />
       </body>
     </html>
   );

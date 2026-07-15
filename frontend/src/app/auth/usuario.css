@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(90deg, aliceblue  0%, #fff 100%);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+section.usuario {
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section.usuario h1 {
+  font-size: clamp(1.4rem, 12vw, 2.5rem);
+  text-align: center;
+}
+
+div.container {
+  width: 98%;
+  max-width: 480px;
+}
+
+div.container div.header {
+  background-color: #2a2829;
+  color: #fff;
+  padding: 1rem 0;
+}
+
+div.container form.main {
+  border-left: 1px solid #2a2829;
+  border-right: 1px solid #2a2829;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+form.main input {
+  font-size: clamp(0.8rem, 3vw, 1rem);
+  border: 1px solid #2a2829;
+  border-left: none;
+  border-right: none;
+  outline: none;
+  padding: 0.6rem 0.4rem;
+}
+
+form.main button {
+  font-size: clamp(0.9rem, 3vw, 1rem);
+  background-color: #2a2829;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 0;
+}
+
+div.footer p {
+  font-size: clamp(0.9rem, 3vw, 1rem);
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+div.footer a {
+  text-decoration: none;
+}
+
+div.footer a:hover {
+  text-decoration: underline;
+}
