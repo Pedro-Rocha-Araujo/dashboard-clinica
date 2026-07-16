@@ -57,6 +57,7 @@ form.main button {
   color: #fff;
   border: none;
   padding: 0.8rem 0;
+  cursor: pointer;
 }
 
 div.footer p {

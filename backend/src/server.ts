@@ -6,6 +6,7 @@ import "dotenv/config"
 import rotasPaciente from "./routes/rotasPaciente.js"
 import rotasProfissional from "./routes/rotasProfissional.js"
 import rotasSenha from "./routes/rotasSenha.js"
+import rotasUsuario from "./routes/rotasUsuario.js"
 
 const app = express()
 app.use(cors())
@@ -13,6 +14,7 @@ app.use(express.json())
 app.use(rotasPaciente)
 app.use(rotasProfissional)
 app.use(rotasSenha)
+app.use(rotasUsuario)
 
 async function conectarBanco():Promise<void> {
   try {

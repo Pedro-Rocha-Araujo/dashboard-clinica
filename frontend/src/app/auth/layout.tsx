@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { ToastContainer } from "react-toastify";
 
 export const metadata:Metadata = {
   title: 'Clínica | Atendimento',
@@ -17,6 +18,7 @@ export default function RootLayout({
         <main>
           {children}
         </main>
+        <ToastContainer autoClose={1000} />
       </body>
     </html>
   );
