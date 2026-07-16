@@ -4,12 +4,8 @@ import "../usuario.css"
 import { useRef } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import axios, { AxiosError } from "axios"
+import axios from "axios"
 import { toast } from "react-toastify"
-
-interface ErroResponse {
-  Erro: string
-}
 
 export default function Cadastro() {
   const router = useRouter()
@@ -34,11 +30,11 @@ export default function Cadastro() {
       router.replace("/auth/login")
     } catch(erro) {
       console.log(erro)
-      const error = erro as AxiosError<ErroResponse>
-      if(error.response) {
-        return toast.error(error.response.data.Erro)
+      if(axios.isAxiosError(erro)) {
+        return toast.error(erro.response?.data.Erro)
+      } else {
+        toast.error("Erro no cadastro.")
       }
-      toast.error("Erro no cadastro.")
     }
   }
 
