@@ -19,7 +19,7 @@ export default function Login() {
         </form>
 
         <div className="footer">
-          <p>Não possui um cadstro? <Link href={`/auth/cadastro`}>Criar Conta.</Link></p>
+          <p>Não possui um cadastro? <Link href={`/auth/cadastro`}>Criar Conta.</Link></p>
         </div>
         
       </div>
