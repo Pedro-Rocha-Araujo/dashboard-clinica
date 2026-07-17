@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import Link from "next/link"
 import axios from "axios"
 import { toast } from "react-toastify"
+import Cookies from "js-cookie"
 
 export default function Login() {
   const router = useRouter()
@@ -25,10 +26,11 @@ export default function Login() {
         usuario: usuario,
         senha: senha
       })
-
       const token = response.data.token
-      localStorage.setItem("token", token)
-      router.replace("/")
+      Cookies.set("token", token, {
+        expires: 1 / 24
+      })
+      router.replace("/",)
     } catch(erro) {
       if(axios.isAxiosError(erro)) {
         return toast.error(erro.response?.data.Erro)
