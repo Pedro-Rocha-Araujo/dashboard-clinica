@@ -1,10 +1,6 @@
 import { Schema, model } from "mongoose"
+import type { Paciente } from "../interfaces/interfacesPaciente.js"
 
-interface Paciente {
-  nome:string,
-  cpf:number,
-  telefone:number
-}
 
 const PacienteSchema = new Schema<Paciente>(
   {

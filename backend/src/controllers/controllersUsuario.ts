@@ -1,15 +1,13 @@
 import type { Request, Response } from "express"
 import UsuarioModel from "../models/Usuario.js"
+import type { UsuarioBody } from "../interfaces/interfacesUsuario.js"
+import type { ProfissionalParams } from "../interfaces/interfacesProfissional.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import "dotenv/config"
+import ProfissionalModel from "../models/Profissional.js"
 
 const salt = 10
-
-interface UsuarioBody {
-  usuario: string,
-  senha: string
-}
 
 export async function cadastrarRecepcionista(
   request:Request<{}, {}, UsuarioBody>, response:Response
@@ -34,6 +32,51 @@ export async function cadastrarRecepcionista(
   } catch(erro) {
     return response.status(500).json({
       Mensagem: "Erro ao cadastrar o Recepcionista",
+      erro: erro
+    })
+  }
+}
+
+export async function cadastrarProfissional(
+  request:Request<ProfissionalParams,{},UsuarioBody>, response:Response
+):Promise<Response> {
+  try {
+    const { profissional_id } = request.params
+    const { usuario, senha } = request.body
+    
+    if(!usuario || !senha) {
+      return response.status(400).json({ Erro: "Todos os campos são obrigatórios." })
+    }
+    
+    const usuarioTratado = usuario.trim()
+    const senhaTratada = senha.trim()
+
+    const consulta_profissional = await ProfissionalModel.findById(profissional_id) 
+    if(!consulta_profissional) {
+      return response.status(404).json({ Erro: "Profissional não encontrado." })
+    }
+    if(consulta_profissional.cadastrado === true) {
+      return response.status(409).json({ Erro: "O profissional emquestão já está cadastrado." })
+    }
+
+    const consulta_usuario = await UsuarioModel.findOne({ usuario: usuarioTratado })
+    if(consulta_usuario) {
+      return response.status(409).json({ Erro: "Nome de usuario já cadastrado." })
+    }
+
+    const senhaCriptografada = await bcrypt.hash(senhaTratada, salt)
+    await UsuarioModel.create({
+      usuario: usuarioTratado,
+      senha: senhaCriptografada,
+      profissional: profissional_id
+    })
+    await ProfissionalModel.findByIdAndUpdate(profissional_id, {
+      cadastrado: true
+    })
+    return response.status(201).json({ Mensagem: "Profissional cadstrado com sucesso." })
+  } catch(erro) {
+    return response.status(500).json({
+      Mensagem: "Erro ao cadastrar o Profissional",
       erro: erro
     })
   }

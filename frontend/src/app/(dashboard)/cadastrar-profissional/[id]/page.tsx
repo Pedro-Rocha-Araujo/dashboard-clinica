@@ -4,6 +4,7 @@ import "./cadastrar-profissional.css"
 import { useState, useRef, useEffect } from "react"
 import { useParams} from "next/navigation"
 import axios from "axios"
+import { toast } from "react-toastify"
 import { Profissional } from "@/interfaces"
 
 export default function CadastrarProfissional() {
@@ -11,6 +12,9 @@ export default function CadastrarProfissional() {
   const { id } = params
 
   const [profissional, setProfissional] = useState<Profissional>()
+
+  const usuarioRef = useRef<HTMLInputElement | null>(null)
+  const senhaRef = useRef<HTMLInputElement | null>(null)
 
   useEffect(()=>{
     async function getProfissional() {
@@ -24,6 +28,10 @@ export default function CadastrarProfissional() {
     getProfissional()
   }, [id])
 
+  async function CadastrarProfissional() {
+    
+  }
+
   return (
     <section className="cadastrar-profissional">
       <h2> <i className="fa-solid fa-clipboard"></i> Cadastrar - {profissional?.nome}</h2>
@@ -31,11 +39,13 @@ export default function CadastrarProfissional() {
         <input 
           type="text" 
           required 
+          ref={usuarioRef}
           placeholder="Usuario de login do profissional" 
         />
         <input 
           type="password" 
           required 
+          ref={senhaRef}
           placeholder="Senha de login do profisisonal" 
         />
         <button>Cadastrar</button>
