@@ -23,7 +23,7 @@ export default function Botoes({ id }: BotoesProps) {
     <div className="botoes">
       <i 
         onClick={()=>redirect("/cadastrar-profissional/"+id)} 
-        className="fa-solid fa-pen-to-square fa-lg"
+        className="fa-solid fa-clipboard fa-lg"
       ></i>
 
       <i 
