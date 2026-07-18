@@ -22,7 +22,7 @@ export default function Botoes({ id }: BotoesProps) {
   return (
     <div className="botoes">
       <i 
-        onClick={()=>redirect("/editar-profissional/"+id)} 
+        onClick={()=>redirect("/cadastrar-profissional/"+id)} 
         className="fa-solid fa-pen-to-square fa-lg"
       ></i>
 

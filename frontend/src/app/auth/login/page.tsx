@@ -62,7 +62,7 @@ export default function Login() {
             ref={senhaRef}
             required 
           />
-          <button>Fazer Login</button>
+          <button>Entrar</button>
         </form>
 
         <div className="footer">

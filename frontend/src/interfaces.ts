@@ -12,6 +12,7 @@ export interface Profissional {
   nome: string,
   ativo: boolean,
   especialidade: string,
+  cadastrado: boolean,
   createdAt: string,
   updatedAt: string
 }
@@ -24,4 +25,11 @@ export interface Senha {
   profissional: Profissional,
   createdAt: string,
   updatedAt: string
+}
+
+export interface Usuario {
+  _id: string,
+  usuario: string,
+  senha: string,
+  profissional?: Profissional
 }
