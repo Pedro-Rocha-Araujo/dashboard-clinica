@@ -17,7 +17,7 @@ export default function ProfissionaisAtivos({ profissionaisAtivos }: Profissiona
                 <h4>{profissional.nome}</h4>
                 <p>{profissional.especialidade}</p>
               </div>
-              <Botoes id={profissional._id} />
+              <Botoes cadastrado={profissional.cadastrado} id={profissional._id} />
             </div>    
           )
         })

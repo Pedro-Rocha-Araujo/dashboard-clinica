@@ -12,7 +12,7 @@ const ProfissionalSchema = new Schema<Profissional>(
     nome: {type: String, required: true, trim: true},
     ativo: {type: Boolean, required: true, default: true},
     especialidade: {type: String, required: true, trim: true},
-    cadastrado: {type: Boolean, default: true}
+    cadastrado: {type: Boolean, default: false}
   }, 
   {
     timestamps: true

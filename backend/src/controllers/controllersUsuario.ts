@@ -86,6 +86,7 @@ export async function logarUsuario(
   request:Request<{}, {}, UsuarioBody>, response:Response
 ):Promise<Response> {
   try {
+    console.log("Chamou o controller")
     const { usuario, senha } = request.body
     if(!usuario || !senha) {
       return response.status(400).json({ Erro: "Todos os campos são obrigatórios." })
@@ -119,6 +120,7 @@ export async function logarUsuario(
     )
     return response.status(200).json({token})
   } catch(erro) {
+    console.log(erro)
     return response.status(500).json({
       Mensagem: "Erro ao logar o usuario",
       erro: erro

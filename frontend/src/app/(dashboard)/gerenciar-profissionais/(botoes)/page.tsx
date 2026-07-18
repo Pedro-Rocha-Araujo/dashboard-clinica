@@ -3,10 +3,11 @@ import axios from "axios"
 import { toast } from "react-toastify"
 
 interface BotoesProps {
-  id: string
+  id: string,
+  cadastrado: boolean
 }
 
-export default function Botoes({ id }: BotoesProps) {
+export default function Botoes({ id, cadastrado }: BotoesProps) {
 
   async function desativarProfissional(id: string) {
     try {
@@ -21,10 +22,12 @@ export default function Botoes({ id }: BotoesProps) {
   
   return (
     <div className="botoes">
-      <i 
-        onClick={()=>redirect("/cadastrar-profissional/"+id)} 
-        className="fa-solid fa-clipboard fa-lg"
-      ></i>
+      { cadastrado === false && (
+        <i 
+          onClick={()=>redirect("/cadastrar-profissional/"+id)} 
+          className="fa-solid fa-clipboard fa-lg"
+        ></i>
+      ) }
 
       <i 
         onClick={()=>desativarProfissional(id)}
