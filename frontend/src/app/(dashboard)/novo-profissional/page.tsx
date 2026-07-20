@@ -5,10 +5,13 @@ import { useRouter } from "next/navigation"
 import { toast } from "react-toastify"
 import { useRef } from "react"
 import "./novo-profissional.css"
+import Cookies from "js-cookie"
 
 export default function NovoProfissional() {
 
   const router = useRouter()
+
+  const token = Cookies.get("token")
 
   const nomeRef = useRef<HTMLInputElement>(null)
   const especialidadeRef = useRef<HTMLInputElement>(null)
@@ -20,10 +23,17 @@ export default function NovoProfissional() {
       if(!nomeRef.current?.value || !especialidadeRef.current?.value) {
         return toast.error("Todos os campos são obrigatórios.")
       }
-      await axios.post("http://localhost:4000/profissional/", {
-        nome: nomeRef.current?.value,
-        especialidade: especialidadeRef.current?.value
-      })
+      await axios.post("http://localhost:4000/profissional/",
+        {
+          nome: nomeRef.current?.value,
+          especialidade: especialidadeRef.current?.value
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          } 
+        }
+    )
       router.push("/gerenciar-profissionais")
     } catch(erro) {
       console.log(erro)

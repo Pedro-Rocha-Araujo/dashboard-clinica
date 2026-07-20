@@ -4,13 +4,19 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import Botoes from "../../components/botoes-home/page"
 import "./home.css"
+import Cookies from "js-cookie"
 
 export default function Home() {
   const [senhas, setSenhas] = useState<Senha[]>([])
+  const token = Cookies.get("token")
 
   async function getSenhas() {
     try {
-      const response = await axios.get("http://localhost:4000/senha")
+      const response = await axios.get("http://localhost:4000/senha", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
       setSenhas(response.data)
     } catch(erro) {
       console.log(erro)
