@@ -4,16 +4,23 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import axios from "axios"
 import "./encaminhamentos.css"
+import Cookies from "js-cookie"
 
 export default function Encaminhamentos() {
   const router = useRouter()
+
+  const token = Cookies.get("token")
 
   const [profissionais, setProfissionais] = useState<Profissional[]>()
 
   useEffect(()=>{
     async function getProfissionais() {
       try {
-        const response = await axios.get("http://localhost:4000/profissional")
+        const response = await axios.get("http://localhost:4000/profissional", {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
         setProfissionais(response.data)
       } catch(erro) {
         console.log(erro)

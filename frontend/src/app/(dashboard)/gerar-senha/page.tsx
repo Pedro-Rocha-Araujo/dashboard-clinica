@@ -4,10 +4,13 @@ import { useRouter } from "next/navigation"
 import axios from "axios"
 import { toast } from "react-toastify"
 import "./gerar-senha.css"
+import Cookies from "js-cookie"
 
 export default function GerarSenha() {
   const router = useRouter()
   const nomeRef = useRef<HTMLInputElement>(null)
+
+  const token = Cookies.get("token")
 
   async function gerarSenha(e: React.FormEvent) {
     e.preventDefault() 
@@ -16,9 +19,16 @@ export default function GerarSenha() {
       if(!nome){
         return toast.error("Preencha o nome do paciente.")
       }
-      await axios.post("http://localhost:4000/senha", {
-        nome: nome
-      })
+      await axios.post("http://localhost:4000/senha", 
+        {
+          nome: nome
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
       toast.success("Senha gerada com sucesso.")
       router.replace("/")
     } catch(erro) {
