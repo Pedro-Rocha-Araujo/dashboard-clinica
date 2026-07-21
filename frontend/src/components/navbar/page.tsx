@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { jwtDecode } from "jwt-decode"
 import Cookies from "js-cookie"
 import Link from "next/link"
@@ -8,6 +9,8 @@ import Botao from "./botao"
 import { Token } from "@/interfaces"
 
 export default function Dashboard() {
+  const router = useRouter()
+
   const cookie = Cookies.get("token")
   const token:Token = jwtDecode(cookie!)
 
@@ -20,6 +23,8 @@ export default function Dashboard() {
       setMenu(true)
     }
   }
+
+
 
   return (
     <nav>
@@ -53,7 +58,17 @@ export default function Dashboard() {
           </ul>
         ): (
           <ul>
+            <li className={menu===true?"esconder":""}>
+              <Link href={`/`}>Agendamentos</Link>
+            </li>
 
+            <li className={menu===true?"esconder":""}>
+              <Link href={`/`}>Perfil</Link>
+            </li>
+            
+            <li className="ultimo">
+              <Botao menu={menu} gerenciarMenu={gerenciarMenu} />
+            </li>
           </ul>
         ) }
       </div>

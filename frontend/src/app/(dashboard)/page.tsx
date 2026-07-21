@@ -1,12 +1,15 @@
 'use client'
 import { Senha } from "@/interfaces"
 import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import axios from "axios"
 import Botoes from "../../components/botoes-home/page"
 import "./home.css"
 import Cookies from "js-cookie"
 
 export default function Home() {
+  const router = useRouter()
+
   const [senhas, setSenhas] = useState<Senha[]>([])
   const token = Cookies.get("token")
 
@@ -21,6 +24,11 @@ export default function Home() {
     } catch(erro) {
       console.log(erro)
     }
+  }
+
+  function sairConta() {
+    Cookies.remove("token")
+    router.replace("/auth/login")
   }
 
   useEffect(()=>{
@@ -65,6 +73,8 @@ export default function Home() {
         </tbody>
 
       </table>
+      <br />
+      <button className="red" onClick={()=>sairConta()}>Sair</button>
     </section>
   );
 }
