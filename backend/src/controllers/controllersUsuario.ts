@@ -68,10 +68,11 @@ export async function cadastrarProfissional(
     await UsuarioModel.create({
       usuario: usuarioTratado,
       senha: senhaCriptografada,
-      profissional: profissional_id
+      profissional: profissional_id,
+      tipo: "PROFISSIONAL"
     })
     await ProfissionalModel.findByIdAndUpdate(profissional_id, {
-      cadastrado: true
+      cadastrado: true,
     })
     return response.status(201).json({ Mensagem: "Profissional cadstrado com sucesso." })
   } catch(erro) {

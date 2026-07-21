@@ -33,3 +33,9 @@ export interface Usuario {
   senha: string,
   profissional?: Profissional
 }
+
+export interface Token {
+  id: string,
+  tipo: "RECEPCAO" | "PROFISSIONAL",
+  usuario: string
+}
