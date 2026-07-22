@@ -8,7 +8,10 @@ import HomeProfissional from "./(home)/profissional"
 
 export default function Home() {
   const cookie = Cookies.get("token")
-  const token:Token = jwtDecode(cookie!)
+  if(!cookie) {
+    return null
+  }
+  const token:Token = jwtDecode(cookie)
 
   return (
     token.tipo === "RECEPCAO" ? (

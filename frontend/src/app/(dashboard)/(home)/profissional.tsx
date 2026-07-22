@@ -10,7 +10,10 @@ import { jwtDecode } from "jwt-decode"
 
 export default function HomeProfissional() {
   const cookie = Cookies.get("token")
-  const token:Token = jwtDecode(cookie!)
+  if(!cookie) {
+    return null
+  }
+  const token:Token = jwtDecode(cookie)
 
   const router = useRouter()
 
@@ -39,13 +42,15 @@ export default function HomeProfissional() {
       }
     }
     getSenhas()
-  }, [profissional])
+  }, [profissional, senhas])
 
   async function finalizarAtendimento(id: string) {
     try {
       await axios.patch(`http://localhost:4000/senha/${id}`)
       toast.success("Atendimento finalizado.")
-      router.replace("/encaminhamentos/"+id)
+      senhas.filter((senha)=>{
+        return id !== senha._id
+      })
     } catch(erro){
       console.log(erro)
       toast.error("Erro ao finalizar o atendimento.")
@@ -61,7 +66,9 @@ export default function HomeProfissional() {
     try {
       await axios.patch(`http://localhost:4000/senha/${id}/cancelar`)
       toast.success("Atendimento cancelado.")
-      router.replace("/encaminhamentos/"+id)
+      senhas.filter((senha)=>{
+        return id !== senha._id
+      })
     } catch(erro){
       console.log(erro)
       toast.error("Erro ao cancelar o atendimento.")

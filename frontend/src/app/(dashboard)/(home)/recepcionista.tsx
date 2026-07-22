@@ -12,6 +12,9 @@ export default function HomeRecepcao() {
 
   const [senhas, setSenhas] = useState<Senha[]>([])
   const token = Cookies.get("token")
+  if(!token){
+    return null
+  }
 
   async function getSenhas() {
     try {

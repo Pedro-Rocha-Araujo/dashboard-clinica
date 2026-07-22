@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
 import { jwtDecode } from "jwt-decode"
 import Cookies from "js-cookie"
 import Link from "next/link"
@@ -9,9 +8,10 @@ import Botao from "./botao"
 import { Token } from "@/interfaces"
 
 export default function Dashboard() {
-  const router = useRouter()
-
   const cookie = Cookies.get("token")
+  if(!cookie) {
+   return null
+  }
   const token:Token = jwtDecode(cookie!)
 
   const [menu, setMenu] = useState<boolean>(false)
@@ -34,7 +34,7 @@ export default function Dashboard() {
       </div>
 
       <div className="main">
-        { token.tipo === "RECEPCAO" ? (
+        { token?.tipo === "RECEPCAO" ? (
           <ul>
             <li className={menu===true?"esconder":""}>
               <Link href={`/gerar-senha`}>Gerar Senha</Link>
