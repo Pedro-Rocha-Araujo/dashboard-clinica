@@ -11,7 +11,7 @@ import {
 
 import checarToken from "../middlewares/middlewareToken.js"
 
-const rotasSenha = Router()
+const rotasSenha = Router()   
 
 rotasSenha.get("/senha", checarToken, listarSenhas)
 rotasSenha.get("/senha/:senha_id", getSenha) 

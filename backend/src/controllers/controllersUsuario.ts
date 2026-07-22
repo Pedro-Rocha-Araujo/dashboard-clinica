@@ -9,6 +9,22 @@ import ProfissionalModel from "../models/Profissional.js"
 
 const salt = 10
 
+export async function getUsuario(request:Request, response:Response):Promise<Response> {
+  try {
+    const { usuario_id } = request.params
+    const usuario = await UsuarioModel.findById(usuario_id)
+    if(!usuario) {
+      return response.status(404).json({ Erro: "Usuário não encontrado." })
+    }
+    return response.status(200).json(usuario)
+  } catch(erro) {
+    return response.status(500).json({
+      Mensagem: "Erro ao buscar usuario",
+      erro: erro
+    })
+  }
+}
+
 export async function cadastrarRecepcionista(
   request:Request<{}, {}, UsuarioBody>, response:Response
 ):Promise<Response> {
@@ -106,7 +122,6 @@ export async function logarUsuario(
     if(!senhaToken) {
       return response.status(500).json({ Erro: "A senha do JWT não foi passada" })
     }
-
     const token = jwt.sign(
       { 
         id: consulta._id, 

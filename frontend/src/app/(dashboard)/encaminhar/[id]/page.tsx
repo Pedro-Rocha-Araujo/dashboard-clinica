@@ -6,8 +6,11 @@ import { useParams, useRouter } from "next/navigation"
 import axios from "axios"
 import { toast } from "react-toastify"
 import "./encaminhamento.css"
+import Cookies from "js-cookie"
 
 export default function Encaminhamento() {
+  const token = Cookies.get("token")
+
   const params = useParams()
   const { id } = params
 
@@ -15,6 +18,7 @@ export default function Encaminhamento() {
 
   const [profissionais, setProfissionais] = useState<Profissional[]>([])
   const [profSelecionado, setProfSelecionado] = useState<string>("")
+  console.log(profissionais)
   const [agendamento, setAgendamento] = useState<Senha | null>(null)
 
   const nomeRef = useRef<HTMLInputElement>(null)
@@ -23,7 +27,11 @@ export default function Encaminhamento() {
 
   async function getProfissionais() {
     try {
-      const response = await axios.get<Profissional[]>("http://localhost:4000/profissional")
+      const response = await axios.get<Profissional[]>("http://localhost:4000/profissional", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
       setProfissionais(response.data)
     } catch(erro) {
       console.log(erro)
