@@ -27,13 +27,11 @@ export default function Dashboard() {
     }
   }
 
-
-
   return (
     <nav>
 
       <div className="header">
-        <h1><Link href={`/`}>Clínica</Link></h1>
+        <h1><i className="fa-solid fa-stethoscope"></i><Link href={`/`}>Clínica</Link></h1>
       </div>
 
       <div className="main">
