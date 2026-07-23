@@ -6,15 +6,16 @@ import axios from "axios"
 import Botoes from "@/components/botoes-home/page"
 import "./home.css"
 import Cookies from "js-cookie"
+import { Token } from "@/interfaces"
 
-export default function HomeRecepcao() {
+interface HomeParams {
+  token: Token
+}
+
+export default function HomeRecepcao({ token }: HomeParams) {
   const router = useRouter()
 
   const [senhas, setSenhas] = useState<Senha[]>([])
-  const token = Cookies.get("token")
-  if(!token){
-    return null
-  }
 
   async function getSenhas() {
     try {

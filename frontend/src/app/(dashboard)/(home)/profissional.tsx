@@ -4,17 +4,14 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import axios from "axios"
 import { toast } from "react-toastify"
-import "./home-profissional.css"
 import Cookies from "js-cookie"
-import { jwtDecode } from "jwt-decode"
+import "./home-profissional.css"
 
-export default function HomeProfissional() {
-  const cookie = Cookies.get("token")
-  if(!cookie) {
-    return null
-  }
-  const token:Token = jwtDecode(cookie)
+interface HomeParams {
+  token: Token
+}
 
+export default function HomeProfissional({ token }: HomeParams) {
   const router = useRouter()
 
   const [senhas, setSenhas] = useState<Senha[]>([])

@@ -3,21 +3,29 @@
 import Cookies from "js-cookie"
 import { jwtDecode } from "jwt-decode"
 import { Token } from "@/interfaces"
+import { useState, useEffect } from "react"
 import HomeRecepcao from "./(home)/recepcionista"
 import HomeProfissional from "./(home)/profissional"
 
 export default function Home() {
-  const cookie = Cookies.get("token")
-  if(!cookie) {
+  const [token, setToken] = useState<Token | null>(null)
+
+  useEffect(()=> {
+    const cookie = Cookies.get("token")
+    if(!cookie) {
+      return
+    }
+    setToken(jwtDecode<Token>(cookie))
+  }, [])
+  if(!token) {
     return null
   }
-  const token:Token = jwtDecode(cookie)
 
   return (
-    token.tipo === "RECEPCAO" ? (
-      <HomeRecepcao />
+    token?.tipo === "RECEPCAO" ? (
+      <HomeRecepcao token={token} />
     ) : (
-      <HomeProfissional />
+      <HomeProfissional token={token} />
     )
   )
 }

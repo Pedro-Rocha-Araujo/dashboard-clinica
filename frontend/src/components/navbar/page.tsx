@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { jwtDecode } from "jwt-decode"
 import Cookies from "js-cookie"
 import Link from "next/link"
@@ -8,13 +8,16 @@ import Botao from "./botao"
 import { Token } from "@/interfaces"
 
 export default function Dashboard() {
-  const cookie = Cookies.get("token")
-  if(!cookie) {
-   return null
-  }
-  const token:Token = jwtDecode(cookie!)
-
+  const [token, setToken] = useState<Token>()
   const [menu, setMenu] = useState<boolean>(false)
+
+  useEffect(()=>{
+   const cookie = Cookies.get("token")
+   if(!cookie) {
+    return 
+   }
+   setToken(jwtDecode(cookie))
+  }, [])
 
   function gerenciarMenu() {
     if(menu === true) {
