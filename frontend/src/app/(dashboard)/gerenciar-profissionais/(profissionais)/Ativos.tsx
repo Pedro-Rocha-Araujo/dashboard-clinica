@@ -22,7 +22,7 @@ export default function ProfissionaisAtivos({ profissionaisAtivos }: Profissiona
           )
         })
       ) : (
-        <p>Nenhum profissional ativo no momento.</p>
+        <p className="feedback">Nenhum profissional ativo no momento.</p>
       ) }
 
     </div>

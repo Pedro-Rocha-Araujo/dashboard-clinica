@@ -40,7 +40,7 @@ export default function ProfissionaisInativos({ profissionaisInativos }: Profiss
           )
         })
       ): (
-        <p>Nenhum profissional inativo no momento.</p>
+        <p className="feedback">Nenhum profissional inativo no momento.</p>
       ) }
       
     </div>

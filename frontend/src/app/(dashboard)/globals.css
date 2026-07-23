@@ -26,6 +26,13 @@ p {
   font-size: clamp(0.9rem, 4vw, 1.1rem);
 }
 
+p.feedback {
+  background-color: #bb2323;
+  color: #fff;
+  padding: 0.4rem 1rem;
+  border-radius: 1rem;
+}
+
 table {
   font-size: clamp(0.9rem, 4vw, 1rem);
 }
