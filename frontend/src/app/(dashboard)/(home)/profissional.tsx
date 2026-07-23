@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import axios from "axios"
 import { toast } from "react-toastify"
 import Cookies from "js-cookie"
-import "./home-profissional.css"
+import "./home.css"
 
 interface HomeParams {
   token: Token
@@ -73,7 +73,7 @@ export default function HomeProfissional({ token }: HomeParams) {
   }
 
   return (
-    <section className="senhas-profissional">
+    <section className="home">
       <h2> <i className="fa-solid fa-list-ol"></i> {token.usuario} | Senhas</h2>
 
       <table>

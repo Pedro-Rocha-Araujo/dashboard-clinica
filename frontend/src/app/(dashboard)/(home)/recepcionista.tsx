@@ -9,35 +9,35 @@ import Cookies from "js-cookie"
 import { Token } from "@/interfaces"
 
 interface HomeParams {
-  token: Token
+  token?: Token,
+  cookie: string
 }
 
-export default function HomeRecepcao({ token }: HomeParams) {
+export default function HomeRecepcao({ token, cookie }: HomeParams) {
   const router = useRouter()
 
   const [senhas, setSenhas] = useState<Senha[]>([])
-
-  async function getSenhas() {
-    try {
-      const response = await axios.get("http://localhost:4000/senha", {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      setSenhas(response.data)
-    } catch(erro) {
-      console.log(erro)
-    }
-  }
 
   function sairConta() {
     Cookies.remove("token")
     router.replace("/auth/login")
   }
-
+  
   useEffect(()=>{
+    async function getSenhas() {
+      try {
+        const response = await axios.get("http://localhost:4000/senha", {
+          headers: {
+            Authorization: `Bearer ${cookie}`
+          }
+        })
+        setSenhas(response.data)
+      } catch(erro) {
+        console.log(erro)
+      }
+    }
     getSenhas()
-  }, [])
+  }, [token])
 
   return (
     <section className="home">

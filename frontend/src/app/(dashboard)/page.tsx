@@ -9,21 +9,21 @@ import HomeProfissional from "./(home)/profissional"
 
 export default function Home() {
   const [token, setToken] = useState<Token | null>(null)
-
+  
+  const cookie = Cookies.get("token")
   useEffect(()=> {
-    const cookie = Cookies.get("token")
     if(!cookie) {
       return
     }
     setToken(jwtDecode<Token>(cookie))
   }, [])
-  if(!token) {
+  if(!token || !cookie) {
     return null
   }
 
   return (
     token?.tipo === "RECEPCAO" ? (
-      <HomeRecepcao token={token} />
+      <HomeRecepcao cookie={cookie} token={token} />
     ) : (
       <HomeProfissional token={token} />
     )

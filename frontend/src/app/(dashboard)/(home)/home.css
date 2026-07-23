@@ -11,9 +11,14 @@ section.home thead {
   color: #fff;
 }
 
+
 section.home th, td{
   border: 1px solid black;
-  padding: 0.4rem 0.8rem;
+  padding: 0.2rem 0.8rem;
+}
+
+section.home th {
+  padding: 0.6rem 0.8rem;
 }
 
 section.home div.botoes, section.senhas-profissional div.botoes {
@@ -55,7 +60,7 @@ section.home button.red {
     border: none;
   }
 
-  section.home div.botoes, section.senhas-profissional div.botoes {
+  section.home div.botoes {
     flex-direction: column;
     float: right;
   }
@@ -73,6 +78,7 @@ section.home button.red {
   table td {
     text-align: right;
     border-bottom: 1px solid #777;
+    padding: 0.4rem;
   }
 
   td::before {
