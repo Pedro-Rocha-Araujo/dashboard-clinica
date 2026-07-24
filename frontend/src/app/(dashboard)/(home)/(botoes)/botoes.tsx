@@ -22,8 +22,15 @@ export default function Botoes({ id }: idProps) {
 
   return (
     <div className="botoes">
-      <button onClick={()=>redirect(`/encaminhar/${id}`)} className="blue">Encaminhar</button>
-      <button onClick={()=>finalizarSenha(id)} className="red">Cancelar</button>
+      
+      <button onClick={()=>redirect(`/recepcao/encaminhar/${id}`)} className="blue">
+        Encaminhar
+      </button>
+
+      <button onClick={()=>finalizarSenha(id)} className="red">
+        Cancelar
+      </button>
+
     </div>
   )
 }
