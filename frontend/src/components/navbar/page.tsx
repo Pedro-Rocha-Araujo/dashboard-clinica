@@ -38,19 +38,19 @@ export default function Dashboard() {
         { token?.tipo === "RECEPCAO" ? (
           <ul>
             <li className={menu===true?"esconder":""}>
-              <Link href={`/gerar-senha`}>Gerar Senha</Link>
+              <Link href={`/recepcao/gerar-senha`}>Gerar Senha</Link>
             </li>
 
             <li className={menu===true?"esconder":""}>
-              <Link href={`/novo-profissional`}>Cadastrar Profissional</Link>
+              <Link href={`/recepcao/novo-profissional`}>Novo Profissional</Link>
             </li>
 
             <li className={menu===true?"esconder":""}>
-              <Link href={`/gerenciar-profissionais`}>Gerenciar Profissionais</Link>
+              <Link href={`/recepcao/gerenciar-profissionais`}>Gerenciar Profissionais</Link>
             </li>
 
             <li className={menu===true?"esconder":""}>
-              <Link href={`/encaminhamentos`}>Ver Encaminhamentos</Link>
+              <Link href={`/recepcao/encaminhamentos`}>Ver Encaminhamentos</Link>
             </li>
             
             <li className="ultimo">

@@ -24,7 +24,7 @@ export default function Botoes({ id, cadastrado }: BotoesProps) {
     <div className="botoes">
       { cadastrado === false && (
         <i 
-          onClick={()=>redirect("/cadastrar-profissional/"+id)} 
+          onClick={()=>redirect("/recepcao/cadastrar-profissional/"+id)} 
           className="fa-solid fa-clipboard fa-lg"
         ></i>
       ) }

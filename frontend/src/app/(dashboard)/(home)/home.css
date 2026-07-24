@@ -1,6 +1,6 @@
 section.home table {
   width: 100%;
-  max-width: 1280px;
+  max-width: 1280px;  
   font-size: clamp(0.8rem, 3vw, 1.1rem);
   border-collapse: collapse;
   text-align: center;

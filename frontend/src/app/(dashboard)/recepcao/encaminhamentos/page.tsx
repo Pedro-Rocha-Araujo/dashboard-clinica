@@ -32,7 +32,7 @@ export default function Encaminhamentos() {
 
 
   function direcionarSenhaProfissional(id: string) {
-    router.push(`/encaminhamentos/${id}`)
+    router.push(`/recepcao/encaminhamentos/${id}`)
   }
 
   return (

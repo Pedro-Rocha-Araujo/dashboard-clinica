@@ -63,7 +63,7 @@ main {
   background-color: aliceblue;
   min-height: 100dvh;
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 280px 1fr;
 }
 
 main nav {
@@ -85,7 +85,7 @@ main nav div.main {
 main nav ul {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.8rem;
 }
 
 main nav ul li button {
