@@ -13,7 +13,7 @@ interface HomeParams {
 
 export default function HomeProfissional({ token }: HomeParams) {
   const router = useRouter()
-  console.log(token)
+
   const [senhas, setSenhas] = useState<Senha[]>([])
   const [profissional, setProfissional] = useState<string>("")
 

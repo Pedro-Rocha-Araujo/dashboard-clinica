@@ -46,7 +46,7 @@ export default function EditarProfissional() {
         especialidade: especialidadeRef.current.value
       })
       toast.success("Profissional Editado.")
-      router.replace("/gerenciar-profissionais")
+      router.replace("/")
     } catch(erro) {
       console.log(erro)
       toast.error("Erro ao editar o Profissional.")

@@ -6,10 +6,15 @@ import Cookies from "js-cookie"
 import Link from "next/link"
 import Botao from "./botao"
 import { Token } from "@/interfaces"
+import axios from "axios"
 
 export default function Dashboard() {
   const [token, setToken] = useState<Token>()
   const [menu, setMenu] = useState<boolean>(false)
+  const [profissional, setProfissional] = useState<string>("")
+
+
+
 
   useEffect(()=>{
    const cookie = Cookies.get("token")
@@ -18,6 +23,21 @@ export default function Dashboard() {
    }
    setToken(jwtDecode(cookie))
   }, [])
+
+  useEffect(()=>{
+    async function getProfissional() {
+      try {
+        if(!token) {
+          return
+        }
+        const response = await axios.get(`http://localhost:4000/usuario/${token.id}`)
+        setProfissional(response.data.profissional)
+      } catch(erro) {
+        console.log(erro)
+      }
+    }
+    getProfissional()
+  }, [token])
 
   function gerenciarMenu() {
     if(menu === true) {
@@ -64,7 +84,7 @@ export default function Dashboard() {
             </li>
 
             <li className={menu===true?"esconder":""}>
-              <Link href={`/`}>Perfil</Link>
+              <Link href={`/profissional/editar-profissional/${profissional}`}>Perfil</Link>
             </li>
             
             <li className="ultimo">
