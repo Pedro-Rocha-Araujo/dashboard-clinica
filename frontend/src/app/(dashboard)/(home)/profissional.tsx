@@ -13,7 +13,7 @@ interface HomeParams {
 
 export default function HomeProfissional({ token }: HomeParams) {
   const router = useRouter()
-
+  console.log(token)
   const [senhas, setSenhas] = useState<Senha[]>([])
   const [profissional, setProfissional] = useState<string>("")
 
@@ -27,7 +27,7 @@ export default function HomeProfissional({ token }: HomeParams) {
       }
     }
     getProfissional()
-  }, [])
+  }, [token])
   
   useEffect(()=>{
     async function getSenhas() {
@@ -38,38 +38,38 @@ export default function HomeProfissional({ token }: HomeParams) {
         console.log(erro)
       }
     }
-    getSenhas()
-  }, [profissional, senhas])
+    getSenhas() 
+  }, [profissional])
 
   async function finalizarAtendimento(id: string) {
     try {
       await axios.patch(`http://localhost:4000/senha/${id}`)
       toast.success("Atendimento finalizado.")
-      senhas.filter((senha)=>{
+      setSenhas(senhas.filter((senha)=>{
         return id !== senha._id
-      })
+      }))
     } catch(erro){
       console.log(erro)
       toast.error("Erro ao finalizar o atendimento.")
+    }
+  }
+  
+  async function cancelarAtendimento(id: string) {
+    try {
+      await axios.patch(`http://localhost:4000/senha/${id}/cancelar`)
+      toast.success("Atendimento cancelado.")
+      setSenhas(senhas.filter((senha)=>{
+        return id !== senha._id
+      }))
+    } catch(erro){
+      console.log(erro)
+      toast.error("Erro ao cancelar o atendimento.")
     }
   }
 
   function sairConta() {
     Cookies.remove("token")
     router.replace("/auth/login")
-  }
-
-  async function cancelarAtendimento(id: string) {
-    try {
-      await axios.patch(`http://localhost:4000/senha/${id}/cancelar`)
-      toast.success("Atendimento cancelado.")
-      senhas.filter((senha)=>{
-        return id !== senha._id
-      })
-    } catch(erro){
-      console.log(erro)
-      toast.error("Erro ao cancelar o atendimento.")
-    }
   }
 
   return (
