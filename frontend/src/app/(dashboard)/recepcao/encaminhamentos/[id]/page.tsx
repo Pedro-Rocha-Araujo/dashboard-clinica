@@ -5,10 +5,14 @@ import { useParams, useRouter } from "next/navigation"
 import axios from "axios"
 import { toast } from "react-toastify"
 import "./senhas-profissional.css"
+import Cookies from "js-cookie"
+import { jwtDecode } from "jwt-decode"
 
 export default function SenhasProfissional() {
   const params = useParams()
   const { id } = params
+
+  const token = Cookies.get("token")
 
   const router = useRouter()
 
@@ -30,7 +34,11 @@ export default function SenhasProfissional() {
   useEffect(()=>{
     async function getProfisisonal() {
       try {
-        const response = await axios.get(`http://localhost:4000/profissional/${id}`)
+        const response = await axios.get(`http://localhost:4000/profissional/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
         setProfissional(response.data)
       } catch(erro) {
         console.log(erro)

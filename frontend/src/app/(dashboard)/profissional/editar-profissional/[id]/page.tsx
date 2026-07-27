@@ -5,10 +5,13 @@ import { useParams, useRouter } from "next/navigation"
 import { toast } from "react-toastify"
 import axios from "axios"
 import "./editar-profissional.css"
+import Cookies from "js-cookie"
 
 export default function EditarProfissional() {
   const params = useParams()
   const router = useRouter()
+
+  const token = Cookies.get("token")
 
   const id = params.id as String
 
@@ -19,7 +22,11 @@ export default function EditarProfissional() {
 
   async function getProfissional() {
     try {
-      const response = await axios.get<Profissional>(`http://localhost:4000/profissional/${id}`)
+      const response = await axios.get<Profissional>(`http://localhost:4000/profissional/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
       setProfissional(response.data)
     } catch(erro) {
       console.log(erro)
@@ -44,6 +51,10 @@ export default function EditarProfissional() {
       await axios.put(`http://localhost:4000/profissional/${id}`, {
         nome: nomeRef.current.value,
         especialidade: especialidadeRef.current.value
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       })
       toast.success("Profissional Editado.")
       router.replace("/")
@@ -55,7 +66,7 @@ export default function EditarProfissional() {
 
   return (
     <section className="editar-profissional">
-      <h2> <i className="fa-solid fa-pen-to-square"></i> Editar Profissional</h2>
+      <h2> <i className="fa-solid fa-pen-to-square"></i> Editar Perfil</h2>
       
       <form onSubmit={editarProfissional} className="editar-profissional" >
         <input 

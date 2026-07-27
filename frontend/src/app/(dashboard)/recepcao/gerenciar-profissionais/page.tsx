@@ -12,10 +12,9 @@ export default function GerenciarProfissionais() {
   const [profissionaisAtivos, setProfissionaisAtivos] = useState<Profissional[]>([])
   const [profissionaisInativos, setProfissionaisInativos] = useState<Profissional[]>([])
 
-  const token = Cookies.get("token")
-
   async function getProfissionaisInativos() {
     try {
+      const token = Cookies.get("token")
       const response = await axios.get("http://localhost:4000/profissional/inativos", {
         headers: {
           Authorization: `Bearer ${token}`
@@ -28,6 +27,7 @@ export default function GerenciarProfissionais() {
   }
   async function getProfissionaisAtivos() {
     try {
+      const token = Cookies.get("token")
       const response = await axios.get("http://localhost:4000/profissional/", {
         headers: {
           Authorization: `Bearer ${token}`
@@ -42,17 +42,22 @@ export default function GerenciarProfissionais() {
   useEffect(()=>{
     getProfissionaisInativos()
     getProfissionaisAtivos()
-  }, [profissionaisAtivos, profissionaisInativos])
+  }, [])
   
   return (
     <section className="gerenciar-profissionais">
       <h2> <i className="fa-solid fa-users"></i> Gerenciar Profissionais</h2>
       
       <h3>Profissionais Ativos</h3>
-      <ProfissionaisAtivos profissionaisAtivos={profissionaisAtivos} />
+      <ProfissionaisAtivos 
+        profissionaisAtivos={profissionaisAtivos}
+      />
 
       <h3>Profissionais Inativos</h3>
-      <ProfissionaisInativos profissionaisInativos={profissionaisInativos} />
+      <ProfissionaisInativos 
+        profissionaisInativos={profissionaisInativos}
+        setProfissionaisInativos={setProfissionaisInativos}
+      />
     </section>
   )
 }

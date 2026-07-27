@@ -28,7 +28,7 @@ export async function profissionaisInativos(_request:Request, response:Response)
   }
 }
 export async function getProfissional(
-  request:Request<ProfissionalParams>, response:Response
+  request:Request<ProfissionalParams, {}, {}, {}>, response:Response
 ):Promise<Response> {
   try {
     const { profissional_id } = request.params
@@ -73,7 +73,7 @@ export async function novoProfissional(
 
 
 export async function editarProfissional(
-  request:Request<ProfissionalParams,{},ProfissionalBody>, response:Response
+  request:Request<ProfissionalParams,{},ProfissionalBody,{}>, response:Response
 ):Promise<Response> {
   try {
     const { profissional_id } = request.params
@@ -99,7 +99,7 @@ export async function editarProfissional(
 
 
 export async function desativarProfissional(
-  request:Request<ProfissionalParams>, response:Response
+  request:Request<ProfissionalParams, {}, {}, {}>, response:Response
 ):Promise<Response> {
   try {
     const { profissional_id } = request.params
@@ -119,7 +119,7 @@ export async function desativarProfissional(
 }
 
 export async function ativarProfissional(
-  request:Request<ProfissionalParams>, response:Response
+  request:Request<ProfissionalParams, {}, {}, {}>, response:Response
 ):Promise<Response> {
   try {
     const { profissional_id } = request.params

@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation"
 import axios from "axios"
 import { toast } from "react-toastify"
+import Cookies from "js-cookie"
 
 interface BotoesProps {
   id: string,
@@ -11,9 +12,17 @@ export default function Botoes({ id, cadastrado }: BotoesProps) {
 
   async function desativarProfissional(id: string) {
     try {
-      await axios.patch(`http://localhost:4000/profissional/${id}`)
+      const token = Cookies.get("token")
+      await axios.patch(
+        `http://localhost:4000/profissional/${id}`, 
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        } 
+      )
       toast.success("Profissional desativado.")
-      
     } catch(erro) {
       console.log(erro)
       toast.error("Erro ao desativar profissional.")

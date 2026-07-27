@@ -5,8 +5,9 @@ interface ProfissionaisAtivosProps {
   profissionaisAtivos: Profissional[]
 }
 
-export default function ProfissionaisAtivos({ profissionaisAtivos }: ProfissionaisAtivosProps) {
-
+export default function ProfissionaisAtivos(
+  { profissionaisAtivos }: ProfissionaisAtivosProps) 
+{
   return (
     <div className="profissionais">
       { profissionaisAtivos.length > 0 ? (

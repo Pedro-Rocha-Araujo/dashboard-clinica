@@ -1,19 +1,33 @@
 import axios from "axios"
 import { toast } from "react-toastify"
 import { Profissional } from "@/interfaces"
+import Cookies from "js-cookie"
 
 interface ProfissionaisInativosProps {
-  profissionaisInativos: Profissional[]
+  profissionaisInativos: Profissional[],
+  setProfissionaisInativos: (profissionais: Profissional[])=> void
 }
 
-export default function ProfissionaisInativos({ profissionaisInativos }: ProfissionaisInativosProps) {
+export default function ProfissionaisInativos(
+  { profissionaisInativos, setProfissionaisInativos }: ProfissionaisInativosProps) 
+{
+
   async function reativarProfissional(id: string) {
     try {
-      await axios.patch(`http://localhost:4000/profissional/ativar/${id}`)
+      const token = Cookies.get("token")
+      await axios.patch(
+        `http://localhost:4000/profissional/ativar/${id}`,
+        {},
+        {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+        }
+      )
+      setProfissionaisInativos(profissionaisInativos.filter((profisisonal)=>{
+        return profisisonal._id !== id
+      }))
       toast.success("Profissional Reativado.")
-      profissionaisInativos.filter((i)=>{
-        return i._id !== id
-      })
     } catch(erro) {
       console.log(erro)
       toast.error("Erro ao reativar o profissional.")
