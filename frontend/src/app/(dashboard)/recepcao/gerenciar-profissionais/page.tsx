@@ -42,7 +42,7 @@ export default function GerenciarProfissionais() {
   useEffect(()=>{
     getProfissionaisInativos()
     getProfissionaisAtivos()
-  }, [])
+  }, [profissionaisAtivos, profissionaisInativos])
   
   return (
     <section className="gerenciar-profissionais">
@@ -51,6 +51,7 @@ export default function GerenciarProfissionais() {
       <h3>Profissionais Ativos</h3>
       <ProfissionaisAtivos 
         profissionaisAtivos={profissionaisAtivos}
+        setProfisisonaisAtivos={setProfissionaisAtivos}
       />
 
       <h3>Profissionais Inativos</h3>
