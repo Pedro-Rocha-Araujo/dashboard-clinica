@@ -8,10 +8,11 @@ import Cookies from "js-cookie"
 import "./home.css"
 
 interface HomeParams {
-  token: Token
+  token: Token,
+  cookie: string
 }
 
-export default function HomeProfissional({ token }: HomeParams) {
+export default function HomeProfissional({ token, cookie }: HomeParams) {
   const router = useRouter()
 
   const [senhas, setSenhas] = useState<Senha[]>([])
@@ -20,7 +21,11 @@ export default function HomeProfissional({ token }: HomeParams) {
   useEffect(()=> {
     async function getProfissional() {
       try {
-        const response = await axios.get(`http://localhost:4000/usuario/${token.id}`)
+        const response = await axios.get(`http://localhost:4000/usuario/${token.id}`, {
+          headers: {
+            Authorization: `Bearer ${cookie}`
+          }
+        })
         setProfissional(response.data.profissional)
       } catch(erro) {
         console.log(erro)
@@ -28,12 +33,19 @@ export default function HomeProfissional({ token }: HomeParams) {
     }
     getProfissional()
   }, [token])
-  
+
   useEffect(()=>{
     async function getSenhas() {
       try {
-         const response = await axios.get(`http://localhost:4000/senha/profissional/${profissional}`)
-         setSenhas(response.data)
+        if(!profissional) {
+          return
+        }
+        const response = await axios.get(`http://localhost:4000/senha/profissional/${profissional}`, {
+        headers: {
+          Authorization: `Bearer ${cookie}`
+        }
+        })
+        setSenhas(response.data)
       } catch(erro) {
         console.log(erro)
       }
@@ -43,7 +55,15 @@ export default function HomeProfissional({ token }: HomeParams) {
 
   async function finalizarAtendimento(id: string) {
     try {
-      await axios.patch(`http://localhost:4000/senha/${id}`)
+      await axios.patch(
+        `http://localhost:4000/senha/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${cookie}`
+          }
+        }
+      )
       toast.success("Atendimento finalizado.")
       setSenhas(senhas.filter((senha)=>{
         return id !== senha._id
@@ -56,7 +76,15 @@ export default function HomeProfissional({ token }: HomeParams) {
   
   async function cancelarAtendimento(id: string) {
     try {
-      await axios.patch(`http://localhost:4000/senha/${id}/cancelar`)
+      await axios.patch(
+        `http://localhost:4000/senha/${id}/cancelar`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${cookie}`
+          }
+        }
+      )
       toast.success("Atendimento cancelado.")
       setSenhas(senhas.filter((senha)=>{
         return id !== senha._id

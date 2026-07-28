@@ -34,7 +34,7 @@ export default function NovoProfissional() {
           } 
         }
     )
-      router.push("/gerenciar-profissionais")
+      router.push("/recepcao/gerenciar-profissionais")
     } catch(erro) {
       console.log(erro)
       return toast.error("Erro ao cadastrar o Profissional.")

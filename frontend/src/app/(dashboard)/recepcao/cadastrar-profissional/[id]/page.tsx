@@ -6,11 +6,14 @@ import { useParams, useRouter } from "next/navigation"
 import axios from "axios"
 import { toast } from "react-toastify"
 import { Profissional } from "@/interfaces"
+import Cookies from "js-cookie"
 
 export default function CadastrarProfissional() {
   const router = useRouter()
   const params = useParams()
   const { id } = params
+
+  const token = Cookies.get("token")
 
   const [profissional, setProfissional] = useState<Profissional>()
 
@@ -20,7 +23,14 @@ export default function CadastrarProfissional() {
   useEffect(()=>{
     async function getProfissional() {
       try {
-        const response = await axios.get(`http://localhost:4000/profissional/${id}`)
+        if(!token) {
+          return null
+        }
+        const response = await axios.get(`http://localhost:4000/profissional/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
         setProfissional(response.data)
       } catch(erro) {
         console.log(erro)
@@ -37,12 +47,20 @@ export default function CadastrarProfissional() {
       if(!usuario || !senha) {
         return toast.error("Preencha todos os campos")
       }
-      await axios.post(`http://localhost:4000/usuario/${id}`, {
+      await axios.post(
+        `http://localhost:4000/usuario/${id}`, 
+        {
         usuario: usuario,
         senha: senha
-      })
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
       toast.success("Profissional cadastrado")
-      router.replace("/gerenciar-profissionais")
+      router.replace("/recepcao/gerenciar-profissionais")
     } catch(erro) {
       if(axios.isAxiosError(erro)) {
         return toast.error(erro.response?.data.Erro)

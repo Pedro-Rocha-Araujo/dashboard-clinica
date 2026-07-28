@@ -18,7 +18,7 @@ export default function Encaminhamento() {
 
   const [profissionais, setProfissionais] = useState<Profissional[]>([])
   const [profSelecionado, setProfSelecionado] = useState<string>("")
-  console.log(profissionais)
+
   const [agendamento, setAgendamento] = useState<Senha | null>(null)
 
   const nomeRef = useRef<HTMLInputElement>(null)
@@ -45,7 +45,11 @@ export default function Encaminhamento() {
   useEffect(()=>{
     async function getAgendamento() {
       try {
-        const response = await axios.get<Senha>(`http://localhost:4000/senha/${id}`)
+        const response = await axios.get<Senha>(`http://localhost:4000/senha/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
         setAgendamento(response.data)
       } catch(erro) {
         console.log(erro)
@@ -68,6 +72,10 @@ export default function Encaminhamento() {
         cpf: cpf,
         telefone: telefone,
         profissional_id: profSelecionado
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       })
       toast.success("Paciente encaminhado.")
       router.replace("/")

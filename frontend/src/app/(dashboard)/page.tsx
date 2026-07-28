@@ -11,6 +11,7 @@ export default function Home() {
   const [token, setToken] = useState<Token | null>(null)
   
   const cookie = Cookies.get("token")
+
   useEffect(()=> {
     if(!cookie) {
       return
@@ -25,7 +26,7 @@ export default function Home() {
     token?.tipo === "RECEPCAO" ? (
       <HomeRecepcao cookie={cookie} token={token} />
     ) : (
-      <HomeProfissional token={token} />
+      <HomeProfissional cookie={cookie} token={token} />
     )
   )
 }

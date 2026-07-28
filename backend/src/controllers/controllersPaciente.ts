@@ -14,7 +14,9 @@ export async function listarPacientes(_request:Request, response:Response):Promi
   }
 }
 
-export async function getPaciente(request:Request<PacienteParams>, response:Response):Promise<Response> {
+export async function getPaciente(
+  request:Request<PacienteParams, {}, {}, {}>, response:Response
+):Promise<Response> {
   try {
     const { paciente_id } = request.params
     const paciente = await PacienteModel.findById(paciente_id)
@@ -30,7 +32,9 @@ export async function getPaciente(request:Request<PacienteParams>, response:Resp
   }
 }
 
-export async function deletarPaciente(request:Request<PacienteParams>, response:Response):Promise<Response> {
+export async function deletarPaciente(
+  request:Request<PacienteParams, {}, {}, {}>, response:Response
+):Promise<Response> {
   try {
     const { paciente_id } = request.params
     const paciente = await PacienteModel.findByIdAndDelete(paciente_id)

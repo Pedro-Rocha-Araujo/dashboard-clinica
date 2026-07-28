@@ -39,7 +39,7 @@ export async function listarSenhas(_request:Request, response:Response):Promise<
 }
 
 export async function getSenha(
-  request:Request<SenhaParams>, response:Response
+  request:Request<SenhaParams, {}, {}, {}>, response:Response
 ):Promise<Response> {
   try {
     const { senha_id } = request.params
@@ -57,7 +57,7 @@ export async function getSenha(
 }
 
 export async function senhasProfissional(
-  request:Request<ProfissionalParams>, response:Response
+  request:Request<ProfissionalParams, {}, {}, {}>, response:Response
 ):Promise<Response> {
   try {
     const { profissional_id } = request.params
@@ -78,7 +78,9 @@ export async function senhasProfissional(
   }
 }
 
-export async function novaSenha(request:Request<{},{},SenhaBody>, response:Response):Promise<Response> {
+export async function novaSenha(
+  request:Request<{}, {}, SenhaBody, {}>, response:Response
+):Promise<Response> {
   try {
     const { nome } = request.body
     const inicio_dia = new Date()
@@ -122,7 +124,7 @@ export async function novaSenha(request:Request<{},{},SenhaBody>, response:Respo
 }
 
 export async function encaminharPaciente(
-  request:Request<SenhaParams,{},EncaminhamentoBody>, response:Response
+  request:Request<SenhaParams, {}, EncaminhamentoBody, {}>, response:Response
   ):Promise<Response> {
   try {
     const { senha_id } = request.params
@@ -164,7 +166,9 @@ export async function encaminharPaciente(
   }
 }
 
-export async function encerrarAtendimento(request:Request<SenhaParams>, response:Response) {
+export async function encerrarAtendimento(
+  request:Request<SenhaParams, {}, {}, {}>, response:Response
+) {
   try {
     const { senha_id } = request.params
     const validacao = await SenhaModel.findById(senha_id)
@@ -190,7 +194,9 @@ export async function encerrarAtendimento(request:Request<SenhaParams>, response
   }
 }
 
-export async function cancelarAtendimento(request:Request, response:Response):Promise<Response> {
+export async function cancelarAtendimento(
+  request:Request, response:Response
+):Promise<Response> {
   try {
     const { senha_id } = request.params
     const senha = await SenhaModel.findByIdAndUpdate(senha_id, {

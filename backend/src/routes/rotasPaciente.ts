@@ -10,7 +10,7 @@ import { checarToken } from "../middlewares/middlewareToken.js"
 const rotasPaciente = Router()
 
 rotasPaciente.get("/paciente", checarToken, listarPacientes)
-rotasPaciente.get("/paciente/:paciente_id", getPaciente)
-rotasPaciente.delete("/paciente/:paciente_id", deletarPaciente)
+rotasPaciente.get("/paciente/:paciente_id", checarToken, getPaciente)
+rotasPaciente.delete("/paciente/:paciente_id", checarToken, deletarPaciente)
 
 export default rotasPaciente

@@ -15,7 +15,7 @@ interface HomeParams {
 
 export default function HomeRecepcao({ token, cookie }: HomeParams) {
   const router = useRouter()
-
+  
   const [senhas, setSenhas] = useState<Senha[]>([])
 
   function sairConta() {

@@ -1,12 +1,11 @@
 'use client'
 import { Senha, Profissional } from "@/interfaces"
 import { useState, useEffect } from "react"
-import { useParams, useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 import axios from "axios"
 import { toast } from "react-toastify"
 import "./senhas-profissional.css"
 import Cookies from "js-cookie"
-import { jwtDecode } from "jwt-decode"
 
 export default function SenhasProfissional() {
   const params = useParams()
@@ -14,15 +13,17 @@ export default function SenhasProfissional() {
 
   const token = Cookies.get("token")
 
-  const router = useRouter()
-
   const [senhas, setSenhas] = useState<Senha[]>([])
   const [profissional, setProfissional] = useState<Profissional>()
   
   useEffect(()=>{
     async function getSenhas() {
       try {
-         const response = await axios.get(`http://localhost:4000/senha/profissional/${id}`)
+         const response = await axios.get(`http://localhost:4000/senha/profissional/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+         })
          setSenhas(response.data)
       } catch(erro) {
         console.log(erro)
@@ -49,9 +50,19 @@ export default function SenhasProfissional() {
 
   async function finalizarAtendimento(id: string) {
     try {
-      await axios.patch(`http://localhost:4000/senha/${id}`)
+      await axios.patch(
+        `http://localhost:4000/senha/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
+      setSenhas(senhas.filter((senha)=>{
+        return senha._id !== id
+      }))
       toast.success("Atendimento finalizado.")
-      router.replace("/encaminhamentos/"+id)
     } catch(erro){
       console.log(erro)
       toast.error("Erro ao finalizar o atendimento.")
@@ -60,9 +71,19 @@ export default function SenhasProfissional() {
 
   async function cancelarAtendimento(id: string) {
     try {
-      await axios.patch(`http://localhost:4000/senha/${id}/cancelar`)
+      await axios.patch(
+        `http://localhost:4000/senha/${id}/cancelar`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
+      setSenhas(senhas.filter((senha)=>{
+        return senha._id !== id
+      }))
       toast.success("Atendimento cancelado.")
-      router.replace("/encaminhamentos/"+id)
     } catch(erro){
       console.log(erro)
       toast.error("Erro ao cancelar o atendimento.")
