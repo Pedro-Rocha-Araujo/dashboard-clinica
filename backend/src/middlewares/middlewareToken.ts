@@ -3,7 +3,7 @@ import Jwt from "jsonwebtoken"
 import "dotenv/config"
 import type { TokenPayload } from "../interfaces/interfacesToken.js"
 
-export default function checarToken(
+export function checarToken(
   request:Request, response:Response, next:NextFunction
 ):Response|void {
   try {
@@ -21,6 +21,20 @@ export default function checarToken(
     }
     const verificaToken = Jwt.verify(token, senhaJwt) as TokenPayload
     request.usuario = verificaToken
+    next()
+  } catch(erro) {
+    return response.status(401).json({ Erro: "Erro ao checar o token" })
+  }
+}
+
+export function checarProfissional(
+  request:Request, response:Response, next:NextFunction
+):Response|void {
+  try {
+    const usuario = request.usuario
+    if(usuario.tipo !== "PROFISSIONAL") {
+      return response.status(401).json({ Erro: "Essa ação é restrita para profissionais." })
+    }
     next()
   } catch(erro) {
     return response.status(401).json({ Erro: "Erro ao checar o token" })

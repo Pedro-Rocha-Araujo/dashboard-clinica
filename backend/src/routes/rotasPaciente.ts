@@ -5,7 +5,7 @@ import {
   deletarPaciente
 } from "../controllers/controllersPaciente.js"
 
-import checarToken from "../middlewares/middlewareToken.js"
+import { checarToken } from "../middlewares/middlewareToken.js"
 
 const rotasPaciente = Router()
 
