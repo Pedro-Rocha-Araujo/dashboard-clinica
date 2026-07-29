@@ -40,3 +40,17 @@ export function checarProfissional(
     return response.status(401).json({ Erro: "Erro ao checar o token" })
   }
 }
+
+export function checarRecepcao(
+  request:Request, response:Response, next:NextFunction
+):Response|void {
+  try {
+    const usuario = request.usuario
+    if(usuario.tipo !== "RECEPCAO") {
+      return response.status(401).json({ Erro: "Essa funcionalidade só é permitida para recepcionistas." })
+    }
+    next()
+  } catch(erro) {
+    return response.status(401).json({ Erro: "Essa funcionalidade só é permitida para recepcionistas." })
+  }
+}
