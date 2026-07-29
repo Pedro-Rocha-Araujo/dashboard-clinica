@@ -42,7 +42,7 @@ export default function GerenciarProfissionais() {
   useEffect(()=>{
     getProfissionaisInativos()
     getProfissionaisAtivos()
-  }, [profissionaisAtivos, profissionaisInativos])
+  }, [profissionaisAtivos])
   
   return (
     <section className="gerenciar-profissionais">

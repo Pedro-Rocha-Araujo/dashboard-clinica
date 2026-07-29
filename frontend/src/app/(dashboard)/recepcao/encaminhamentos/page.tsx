@@ -48,7 +48,7 @@ export default function Encaminhamentos() {
                 <h4>{profissional.nome}</h4>
                 <p>{profissional.especialidade}</p>
               </div>
-              <i className="fa-solid fa-eye fa-xl"></i>
+              <i className="fa-solid fa-eye fa-lg"></i>
             </div>
           )
         })}

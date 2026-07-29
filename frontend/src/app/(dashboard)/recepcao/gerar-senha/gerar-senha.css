@@ -6,11 +6,11 @@ section.gerar-senha form {
   gap: 0.4rem;
 }
 
-section.gerar-senha input, button {
-  font-size: 1rem;
+section.gerar-senha input, section.gerar-senha button {
+  font-size: clamp(0.7rem, 4vw, 1rem);
   border: 1px solid #555;
   outline: none ;
-  padding: 0.5rem 0.2rem;
+  padding: 0.5rem 0.4rem;
 }
 
 section.gerar-senha button {

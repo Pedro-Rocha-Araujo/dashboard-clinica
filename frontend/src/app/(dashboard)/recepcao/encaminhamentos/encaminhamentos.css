@@ -1,4 +1,4 @@
-div.profissionais {
+section.encaminhamentos div.profissionais {
   width: 98%;
   max-width: 1920px;
   display: flex;
@@ -7,7 +7,7 @@ div.profissionais {
   margin: 0.4rem 0 0.6rem 0;
 }
 
-div.profissional {
+section.encaminhamentos div.profissional {
   background-color: #fff;
   box-shadow: -2px 3px 2px 2px rgba(0, 0, 0, 0.3);
   width: 100%;
@@ -19,15 +19,25 @@ div.profissional {
   border-radius: 2rem;
 }
 
-div.pop {
+section.encaminhamentos div.pop {
   transition: all 0.2s;
   cursor: pointer;
 }
 
-div.pop:hover {
+section.encaminhamentos div.pop:hover {
   transform: scale(1.02);
 }
 
 section.gerenciar-profissionais h3 {
   margin: 0.8rem 0;
+}
+
+@media screen and (max-width: 980px) {
+  section.encaminhamentos div.profissionais {
+    justify-content: center;
+  }
+
+  section.encaminhamentos div.profissional {
+    max-width: 620px;
+  }
 }

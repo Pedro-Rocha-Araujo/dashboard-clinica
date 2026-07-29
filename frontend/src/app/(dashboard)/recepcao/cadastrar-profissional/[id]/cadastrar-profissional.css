@@ -6,21 +6,18 @@ form.cadastrar-profissional {
   gap: 0.4rem;
 }
 
-form.cadastrar-profissional button {
-  border: 1px solid #555;
-  outline: none ;
-  padding: 0.5rem 0.2rem;
+form.cadastrar-profissional input, form.cadastrar-profissional button {
+  font-size: clamp(0.7rem, 4vw, 1rem);
 }
 
 form.cadastrar-profissional input {
-  font-size: clamp(0.9rem, 3vw, 1rem);
   border: 1px solid #555;
   outline: none ;
-  padding: 0.5rem 0.2rem;
+  padding: 0.5rem 0.4rem;
 }
 
 form.cadastrar-profissional button {
-  padding: 0.7rem;
+  padding: 0.7rem 0;
   color: #fff;
   background-color: #2a2829;
   border: none; 

@@ -6,7 +6,7 @@
 }
 
 h1 {
-  font-size: clamp(1.4rem, 10vw, 2.4rem);
+  font-size: clamp(1.4rem, 12vw, 2.4rem);
 }
 
 div.header h1 {
@@ -14,12 +14,12 @@ div.header h1 {
 }
 
 h2 {
-  font-size: clamp(1.2rem, 8vw, 2rem);
+  font-size: clamp(1.1rem, 8vw, 2rem);
   margin-bottom: 0.8rem;
 }
 
 h3 {
-  font-size: clamp(1.1rem, 7vw, 1.6rem);
+  font-size: clamp(1rem, 7vw, 1.6rem);
 }
 
 div.profissional h4 {
@@ -46,7 +46,7 @@ ul {
 }
 
 ul a {
-  font-size: clamp(0.9rem, 4vw, 1rem);
+  font-size: clamp(0.8rem, 4vw, 1rem);
 }
 
 a {

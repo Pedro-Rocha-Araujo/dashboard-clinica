@@ -20,7 +20,7 @@ section.usuario {
 }
 
 section.usuario h1 {
-  font-size: clamp(1.4rem, 12vw, 2.5rem);
+  font-size: clamp(1.4rem, 12vw, 2.6rem);
   text-align: center;
 }
 
@@ -44,7 +44,7 @@ div.container form.main {
 }
 
 form.main input {
-  font-size: clamp(0.8rem, 3vw, 1rem);
+  font-size: clamp(0.7rem, 4vw, 1rem);
   border: none;
   border-bottom: 2px solid #2a2829;
   outline: none;
@@ -65,7 +65,7 @@ form.main button {
 }
 
 div.footer p {
-  font-size: clamp(0.9rem, 3vw, 1rem);
+  font-size: clamp(0.7rem, 4vw, 1rem);
   text-align: center;
   margin: 0.5rem 0;
 }

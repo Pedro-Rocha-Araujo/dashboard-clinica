@@ -7,13 +7,10 @@ form.novo-profissional {
 }
 
 form.novo-profissional input, form.novo-profissional button {
+  font-size: clamp(0.7rem, 4vw, 1rem);
   border: 1px solid #555;
   outline: none ;
-  padding: 0.5rem 0.2rem;
-}
-
-form.novo-profissional input {
-  font-size: clamp(0.9rem, 3vw, 1rem);
+  padding: 0.5rem 0.4rem;
 }
 
 form.novo-profissional button {

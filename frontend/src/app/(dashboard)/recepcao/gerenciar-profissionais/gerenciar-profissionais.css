@@ -1,4 +1,4 @@
-div.profissionais {
+section.gerenciar-profissionais div.profissionais {
   width: 98%;
   max-width: 1920px;
   display: flex;
@@ -7,7 +7,7 @@ div.profissionais {
   margin: 0.4rem 0 0.6rem 0;
 }
 
-div.profissional {
+section.gerenciar-profissionais div.profissional {
   background-color: #fff;
   box-shadow: -2px 3px 2px 2px rgba(0, 0, 0, 0.3);
   width: 100%;
@@ -19,16 +19,16 @@ div.profissional {
   border-radius: 2rem;
 }
 
-div.botoes {
+section.gerenciar-profissionais div.botoes {
   display: flex;
   gap: 0.4rem;
 }
 
-div.botoes i {
+section.gerenciar-profissionais div.botoes i {
   cursor: pointer;
 }
 
-div.inativos div.profissional {
+section.gerenciar-profissionais div.inativos div.profissional {
   background-color: #ccc;
 }
 
@@ -36,9 +36,14 @@ div.inativos div.profissional {
 @media screen and (max-width: 980px) {
   section.gerenciar-profissionais h3 {
     text-align: center;
+    margin: 1rem 0;
   }
   
-  div.profissionais {
+  section.gerenciar-profissionais div.profissionais {
     justify-content: center;
+  }
+
+  section.gerenciar-profissionais div.profissional {
+    max-width: 620px;
   }
 }
