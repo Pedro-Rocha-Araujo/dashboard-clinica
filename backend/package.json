@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
-    "test": "jest"
+    "start": "node dist/server.js"
   },
   "keywords": [],
   "author": "",
@@ -30,8 +29,6 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^26.0.1",
     "@types/supertest": "^7.2.1",
-    "jest": "^30.4.2",
-    "ts-jest": "^29.4.12",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3"
   }
