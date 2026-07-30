@@ -10,6 +10,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.3.0",
     "axios": "^1.18.1",
+    "dashboard-clinica": "file:..",
     "js-cookie": "^3.0.8",
     "jwt-decode": "^4.0.0",
     "next": "16.2.9",
