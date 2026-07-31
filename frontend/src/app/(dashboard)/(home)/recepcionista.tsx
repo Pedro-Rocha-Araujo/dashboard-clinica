@@ -2,8 +2,9 @@
 import { Senha } from "@/interfaces"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
+import { redirect } from "next/navigation"
 import axios from "axios"
-import Botoes from "./(botoes)/botoes"
+import { toast } from "react-toastify"
 import "./home.css"
 import Cookies from "js-cookie"
 import { Token } from "@/interfaces"
@@ -22,6 +23,28 @@ export default function HomeRecepcao({ token, cookie }: HomeParams) {
     Cookies.remove("token")
     router.replace("/auth/login")
   }
+
+  async function finalizarSenha(id: string) {
+    try {
+      await axios.patch(
+        `http://localhost:4000/senha/${id}/cancelar`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${cookie}`
+          }
+        }
+      )
+      setSenhas(senhas.filter((senha)=>{
+        return senha._id !== id
+      }))
+      toast.success("Atendimento Cancelado.")
+    } catch(erro) {
+      console.log(erro)
+      toast.error("Erro ao cancelar o atendimento.")
+    }
+  }
+
   
   useEffect(()=>{
     async function getSenhas() {
@@ -61,8 +84,19 @@ export default function HomeRecepcao({ token, cookie }: HomeParams) {
                     <td data-label="Senha:">{senha.numero}</td>
                     <td data-label="Paciente:">{senha.paciente.nome}</td>
                     <td data-label="Status:">{senha.status}</td>
-                    <td data-label="Funcionalidades:">
-                      <Botoes id={senha._id} />
+                    <td>
+
+                      <div className="botoes">
+                        <button onClick={()=>redirect(`/recepcao/encaminhar/${senha._id}`)} className="blue">
+                          Encaminhar
+                        </button>
+
+                        <button onClick={()=>finalizarSenha(senha._id)} className="red">
+                          Cancelar
+                        </button>
+
+                      </div>
+
                     </td>
                   </tr>
               )
