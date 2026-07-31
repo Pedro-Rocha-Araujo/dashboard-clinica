@@ -24,3 +24,6 @@
 * Automaticamente as senhas do dia anterior são encerradas dinamicamente e se inicia uma nova contagem
 * Encerrar ou Finalizar o atendimento
 * Tela de listagem de senhas por profissional
+
+### 🎥 Vídeo no youtube mostrando o projeto:
+https://youtu.be/7M18cro05KU
