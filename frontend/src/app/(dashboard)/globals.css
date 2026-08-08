@@ -60,7 +60,10 @@ button {
 }
 
 main {
-  background-color: aliceblue;
+  background-image: linear-gradient(rgba(240, 248, 255, 0.5), #ffffff80), url('../../../public/bachground.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   min-height: 100dvh;
   display: grid;
   grid-template-columns: 280px 1fr;

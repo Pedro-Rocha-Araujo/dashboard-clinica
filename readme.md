@@ -3,7 +3,7 @@
 ## 🗒️ Descrição do projeto:
 * O presente projeto é um sistema de gerenciamento de senhas e chamados desenvolvido para uma clínica
 
-<img width="1920" height="911" alt="miniatura-dashboard" src="https://github.com/user-attachments/assets/6915200b-3aaa-4367-9862-d82c15b9883c" />
+<img width="1920" height="911" alt="projeto-clinica" src="https://github.com/user-attachments/assets/472a8ffa-d4ec-4730-a1a2-a2ccd10f5500" />
 
 ### 🔧 Tecnologias usadas para o desenvolvimento:
 * Typescript
