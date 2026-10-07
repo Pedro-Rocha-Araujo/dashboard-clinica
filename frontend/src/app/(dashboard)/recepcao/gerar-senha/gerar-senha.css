@@ -16,11 +16,7 @@ section.gerar-senha input, section.gerar-senha button {
 section.gerar-senha button {
   padding: 0.7rem;
   color: #fff;
-  background-color: #2a2829;
+  background-color: #1c1c1c;
   border: none; 
   transition: all 0.3s;
-}
-
-section.gerar-senha button:hover {
-  background-color: #383637;
 }

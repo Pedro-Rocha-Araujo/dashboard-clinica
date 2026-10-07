@@ -33,14 +33,14 @@ div.container {
 }
 
 div.container div.header {
-  background-color: #2a2829;
+  background-color: #1c1c1c;
   color: #fff;
   padding: 1.5rem 0;
 }
 
 div.container form.main {
-  border-left: 2px solid #2a2829;
-  border-right: 2px solid #2a2829;
+  border-left: 2px solid #1c1c1c;
+  border-right: 2px solid #1c1c1c;
   display: flex;
   flex-direction: column;
   padding-top: 0rem;
@@ -49,18 +49,18 @@ div.container form.main {
 form.main input {
   font-size: clamp(0.7rem, 4vw, 1rem);
   border: none;
-  border-bottom: 2px solid #2a2829;
+  border-bottom: 2px solid #1c1c1c;
   outline: none;
   padding: 0.6rem 0.4rem;
 }
 
 form.main input::placeholder {
-  color: #2a2829;
+  color: #1c1c1c;
 }
 
 form.main button {
   font-size: clamp(0.9rem, 3vw, 1rem);
-  background-color: #2a2829;
+  background-color: #1c1c1c;
   color: #fff;
   border: none;
   padding: 0.8rem 0;

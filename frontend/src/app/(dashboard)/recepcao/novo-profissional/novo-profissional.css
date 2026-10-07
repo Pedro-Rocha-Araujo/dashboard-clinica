@@ -16,11 +16,11 @@ form.novo-profissional input, form.novo-profissional button {
 form.novo-profissional button {
   padding: 0.7rem;
   color: #fff;
-  background-color: #2a2829;
+  background-color: #1c1c1c;
   border: none; 
   transition: all 0.3s;
 }
 
 section.novo-profissional button:hover {
-  background-color: #383637;
+  background-color: #1c1c1c;
 }
